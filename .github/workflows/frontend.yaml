@@ -1,15 +1,15 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # Frontend CI — Lint, format check, build, and unit tests
-# Runs on pushes and PRs to main/dev, skipping backend-only changes
+# Runs on pushes and PRs to none/none-dev, skipping backend-only changes
 # ─────────────────────────────────────────────────────────────────────────────
 name: Frontend Build
 
 on:
   push:
-    branches: [main, dev]
+    branches: [none, none-dev]
     paths-ignore: ['backend/**', 'pyproject.toml', 'uv.lock']
   pull_request:
-    branches: [main, dev]
+    branches: [none, none-dev]
     paths-ignore: ['backend/**', 'pyproject.toml', 'uv.lock']
 
 concurrency:

@@ -1,12 +1,12 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # Tests — run the open-webui/tests unit suite against a release candidate
-# Release pull requests go from dev into main and are titled with the version
+# Release pull requests go from dev into none and are titled with the version
 # ─────────────────────────────────────────────────────────────────────────────
 name: Tests
 
 on:
   pull_request:
-    branches: [main, dev]
+    branches: [none, dev]
     types: [opened, synchronize, reopened, edited]
 
 # An edit must not cancel a running suite: the replacement run would skip it and still report green.

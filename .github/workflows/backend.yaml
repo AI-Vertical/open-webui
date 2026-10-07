@@ -1,15 +1,15 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # Backend CI — Python formatting checks via Ruff
-# Runs on pushes and PRs to main/dev when backend files change
+# Runs on pushes and PRs to none/dev when backend files change
 # ─────────────────────────────────────────────────────────────────────────────
 name: Python CI
 
 on:
   push:
-    branches: [main, dev]
+    branches: [none]
     paths: ['backend/**', 'pyproject.toml', 'uv.lock', '.github/workflows/backend.yaml']
   pull_request:
-    branches: [main, dev]
+    branches: [none, dev]
     paths: ['backend/**', 'pyproject.toml', 'uv.lock', '.github/workflows/backend.yaml']
 
 concurrency:

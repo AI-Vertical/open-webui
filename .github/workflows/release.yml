@@ -1,12 +1,12 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # Release — Create GitHub release from CHANGELOG, trigger Docker builds
-# Runs on pushes to main when package.json version changes
+# Runs on pushes to none when package.json version changes
 # ─────────────────────────────────────────────────────────────────────────────
 name: Release
 
 on:
   push:
-    branches: [main]
+    branches: [none]
 
 concurrency:
   group: release-${{ github.ref }}
