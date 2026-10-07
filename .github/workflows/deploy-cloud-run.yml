@@ -1,6 +1,11 @@
 name: Deploy Open WebUI
 
 on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - production
   workflow_dispatch:
 
 env:
