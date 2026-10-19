@@ -9,6 +9,8 @@
 	import FileTypeIcon from './FileTypeIcon.svelte';
 	import Icon from './Icon.svelte';
 
+	export let dragType = 'application/x-terminal-file-move';
+	export let variant: 'terminal' | 'workspace' = 'terminal';
 	const i18n: any = getContext('i18n');
 
 	export let entry: FileEntry;
@@ -22,6 +24,9 @@
 	export let terminalKey: string = '';
 
 	export let onOpen: (entry: FileEntry) => void = () => {};
+	export let onSelectForComparison: (() => void) | undefined = undefined;
+	export let onCompareWithSelected: (() => void) | undefined = undefined;
+	export let comparisonPath: string | null = null;
 	export let onDownload: (path: string) => void = () => {};
 	export let onDelete: (path: string, name: string) => void = () => {};
 	export let onMove: (sources: string[], destFolder: string) => void | Promise<void> = () => {};
@@ -29,6 +34,7 @@
 
 	// ── Selection ─────────────────────────────────────────────────────────
 	export let selected: boolean = false;
+	export let active = false;
 	export let selectionMode: boolean = false;
 	export let selectedPaths: Set<string> = new Set();
 	export let onSelect: (
@@ -48,6 +54,10 @@
 	$: directoryPath = entryPath.endsWith('/') ? entryPath : `${entryPath}/`;
 	$: writable = entry.writable !== false;
 	$: canMutate = parentWritable && writable;
+	$: menuItemClass =
+		variant === 'workspace'
+			? 'select-none flex h-[1.6875rem] w-full cursor-pointer items-center gap-2 rounded-xl bg-transparent px-2 text-xs hover:text-gray-900 dark:hover:text-gray-100'
+			: 'select-none flex h-7 w-full items-center gap-2 rounded-lg px-2 text-xs hover:bg-gray-50/40 dark:hover:bg-white/4 transition';
 	$: rowIndent = `${8 + depth * 16}px`;
 
 	const formatRelativeTime = (epoch: number): string => {
@@ -76,6 +86,7 @@
 	let renameInput: HTMLInputElement;
 
 	const startRename = async () => {
+		if (!canMutate) return;
 		renameValue = entry.name;
 		renaming = true;
 		await tick();
@@ -161,8 +172,10 @@
 
 <li class="group" data-file-row>
 	<div
-		class="w-full flex items-center transition-colors duration-75
-			{selected ? 'bg-gray-100 dark:bg-white/8' : 'hover:bg-gray-50/40 dark:hover:bg-white/4'}
+		class="w-full flex items-center transition-colors duration-75 {variant === 'workspace'
+			? 'rounded-xl'
+			: ''}
+			{selected || active ? 'bg-gray-100 dark:bg-white/8' : 'hover:bg-gray-50/40 dark:hover:bg-white/4'}
 			{dragOverFolder
 			? 'bg-gray-100 dark:bg-white/8 ring-1 ring-black/15 dark:ring-white/15 ring-inset'
 			: ''}"
@@ -170,7 +183,7 @@
 		on:dragover={(e) => {
 			if (entry.type !== 'directory') return;
 			if (!writable) return;
-			if (!e.dataTransfer?.types.includes('application/x-terminal-file-move')) return;
+			if (!e.dataTransfer?.types.includes(dragType)) return;
 			e.preventDefault();
 			e.stopPropagation();
 			dragOverFolder = true;
@@ -190,7 +203,7 @@
 		on:drop={async (e) => {
 			if (entry.type !== 'directory') return;
 			if (!writable) return;
-			const raw = e.dataTransfer?.getData('application/x-terminal-file-move');
+			const raw = e.dataTransfer?.getData(dragType);
 			if (!raw) return;
 			e.preventDefault();
 			e.stopPropagation();
@@ -207,23 +220,25 @@
 			} catch {}
 		}}
 	>
-		{#if entry.type === 'directory'}
+		{#if variant === 'workspace'}
+			<span class="shrink-0" style:width={rowIndent}></span>
+		{:else if entry.type === 'directory'}
 			<button
 				type="button"
-				class="mr-1.5 flex w-5 shrink-0 items-center self-stretch justify-center text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400"
+				class="mr-1.5 flex w-3 shrink-0 items-center self-stretch justify-center text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400"
 				style="margin-left: {rowIndent};"
 				on:click|stopPropagation={() => onToggleExpand(directoryPath)}
 				aria-label={expanded ? $i18n.t('Collapse') : $i18n.t('Expand')}
 			>
 				<Icon
 					name={expanded ? 'chevron-down' : 'chevron-right'}
-					size={9}
+					size={12}
 					strokeWidth={1.5}
 					class={loadingChildren ? 'animate-pulse' : ''}
 				/>
 			</button>
 		{:else}
-			<span class="mr-1.5 w-5 shrink-0 self-stretch" style="margin-left: {rowIndent};"></span>
+			<span class="mr-1.5 w-3 shrink-0 self-stretch" style="margin-left: {rowIndent};"></span>
 		{/if}
 
 		{#if selectionMode || selected}
@@ -243,7 +258,7 @@
 
 		<button
 			type="button"
-			class="flex min-w-0 flex-1 items-center gap-2 py-1.5 pr-2 text-left"
+			class="flex min-w-0 flex-1 items-center gap-1.5 py-1.5 pr-2 text-left"
 			draggable={canMutate}
 			on:dragstart={(e) => {
 				if (!canMutate) {
@@ -253,10 +268,7 @@
 				const filePath = entryPath.replace(/\/$/, '');
 				// If dragging a selected item, drag all selected
 				if (selected && selectedPaths.size > 1) {
-					e.dataTransfer?.setData(
-						'application/x-terminal-file-move',
-						JSON.stringify({ paths: [...selectedPaths] })
-					);
+					e.dataTransfer?.setData(dragType, JSON.stringify({ paths: [...selectedPaths] }));
 					// Custom drag ghost showing count
 					const ghost = document.createElement('div');
 					ghost.style.cssText =
@@ -267,14 +279,14 @@
 					requestAnimationFrame(() => ghost.remove());
 				} else {
 					e.dataTransfer?.setData(
-						'application/x-terminal-file-move',
+						dragType,
 						JSON.stringify({
 							path: entry.type === 'directory' ? directoryPath : filePath,
 							name: entry.name
 						})
 					);
 				}
-				if (entry.type === 'file') {
+				if (entry.type === 'file' && terminalUrl) {
 					e.dataTransfer?.setData(
 						'application/x-terminal-file',
 						JSON.stringify({
@@ -289,18 +301,27 @@
 			on:pointerdown={onPointerDown}
 			on:pointerup={onPointerUp}
 			on:pointercancel={onPointerCancel}
+			aria-expanded={variant === 'workspace' && entry.type === 'directory' ? expanded : undefined}
 			on:click={handleClick}
 			on:dblclick|preventDefault|stopPropagation={() => {
 				startRename();
 			}}
 		>
-			<FileTypeIcon name={entry.name} type={entry.type} size={12} />
+			{#if variant === 'workspace'}
+				{#if entry.type === 'directory'}
+					<Icon name={expanded ? 'chevron-down' : 'chevron-right'} size={12} strokeWidth={1.5} />
+				{:else}<span class="w-3 shrink-0"></span>{/if}
+			{/if}
+			<FileTypeIcon name={entry.name} type={entry.type} size={14} />
 			{#if renaming}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<input
 					bind:this={renameInput}
 					bind:value={renameValue}
-					class="flex-1 text-xs bg-transparent border border-gray-100 dark:border-white/[0.06] rounded px-1.5 py-0.5 outline-none focus:border-blue-400 dark:focus:border-blue-500 text-gray-800 dark:text-gray-200 min-w-0"
+					class="flex-1 text-xs bg-transparent outline-none text-gray-800 dark:text-gray-200 min-w-0 {variant ===
+					'workspace'
+						? 'h-4 p-0 leading-4'
+						: 'border border-gray-100 dark:border-white/[0.06] rounded px-1.5 py-0.5 focus:border-blue-400 dark:focus:border-blue-500'}"
 					on:keydown={(e) => {
 						if (e.key === 'Enter') {
 							e.preventDefault();
@@ -319,7 +340,7 @@
 					{entry.name}
 				</span>
 			{/if}
-			{#if !writable && !renaming}
+			{#if !writable && !renaming && variant !== 'workspace'}
 				<span class="text-[0.625rem] text-gray-400 shrink-0">{$i18n.t('Read-only')}</span>
 			{/if}
 			{#if entry.type === 'file' && entry.size !== undefined && !renaming}
@@ -338,6 +359,7 @@
 
 		<Dropdown bind:show={menuOpen} align="end" sideOffset={4}>
 			<button
+				type="button"
 				class="shrink-0 flex h-5 w-5 items-center justify-center mr-1 rounded transition
 					text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-400
 					hover:bg-gray-50/40 dark:hover:bg-white/4"
@@ -348,29 +370,57 @@
 
 			<div slot="content">
 				<DropdownMenu className="min-w-[9.375rem] z-[9999999]">
-					<button
-						type="button"
-						class="select-none flex h-7 w-full items-center gap-2 rounded-lg px-2 text-xs hover:bg-gray-50/40 dark:hover:bg-white/4 transition"
-						on:click={(e) => {
-							e.stopPropagation();
-							menuOpen = false;
-							onOpen(entry);
-						}}
-					>
-						<Icon
-							name={entry.type === 'directory' ? 'folder' : 'eye'}
-							size={12}
-							strokeWidth={1.4}
-						/>
-						<div class="flex items-center">
-							{entry.type === 'directory' ? $i18n.t('Open Folder') : $i18n.t('Open')}
-						</div>
-					</button>
-
+					{#if variant !== 'workspace' || entry.type !== 'directory'}
+						<button
+							type="button"
+							class={menuItemClass}
+							on:click={(e) => {
+								e.stopPropagation();
+								menuOpen = false;
+								onOpen(entry);
+							}}
+						>
+							<Icon
+								name={entry.type === 'directory' ? 'folder' : 'eye'}
+								size={12}
+								strokeWidth={1.4}
+							/>
+							<div class="flex items-center">
+								{entry.type === 'directory' ? $i18n.t('Open Folder') : $i18n.t('Open')}
+							</div>
+						</button>
+					{/if}
+					{#if entry.type === 'file' && onSelectForComparison}
+						<button
+							type="button"
+							class={menuItemClass}
+							on:click|stopPropagation={() => {
+								menuOpen = false;
+								onSelectForComparison?.();
+							}}
+						>
+							<Icon name="page" size={12} /><span>{$i18n.t('Select for Compare')}</span>
+						</button>
+						{#if onCompareWithSelected}
+							<button
+								type="button"
+								class="{menuItemClass} disabled:opacity-40"
+								disabled={comparisonPath === entryPath}
+								on:click|stopPropagation={() => {
+									menuOpen = false;
+									onCompareWithSelected?.();
+								}}
+							>
+								<Icon name="split-horizontal" size={12} /><span
+									>{$i18n.t('Compare with Selected')}</span
+								>
+							</button>
+						{/if}
+					{/if}
 					{#if entry.type === 'directory'}
 						<button
 							type="button"
-							class="select-none flex h-7 w-full items-center gap-2 rounded-lg px-2 text-xs hover:bg-gray-50/40 dark:hover:bg-white/4 transition"
+							class={menuItemClass}
 							on:click={(e) => {
 								e.stopPropagation();
 								menuOpen = false;
@@ -389,7 +439,7 @@
 					{:else}
 						<button
 							type="button"
-							class="select-none flex h-7 w-full items-center gap-2 rounded-lg px-2 text-xs hover:bg-gray-50/40 dark:hover:bg-white/4 transition"
+							class={menuItemClass}
 							on:click={(e) => {
 								e.stopPropagation();
 								menuOpen = false;
@@ -403,7 +453,7 @@
 
 					<button
 						type="button"
-						class="select-none flex h-7 w-full items-center gap-2 rounded-lg px-2 text-xs hover:bg-gray-50/40 dark:hover:bg-white/4 transition"
+						class={menuItemClass}
 						on:click={async (e) => {
 							e.stopPropagation();
 							menuOpen = false;
@@ -418,7 +468,7 @@
 
 					<button
 						type="button"
-						class="select-none flex h-7 w-full items-center gap-2 rounded-lg px-2 text-xs hover:bg-gray-50/40 dark:hover:bg-white/4 transition disabled:opacity-40 disabled:hover:bg-transparent"
+						class="{menuItemClass} disabled:opacity-40 disabled:hover:bg-transparent"
 						disabled={!canMutate}
 						on:click={(e) => {
 							e.stopPropagation();
@@ -433,7 +483,7 @@
 
 					<button
 						type="button"
-						class="select-none flex h-7 w-full items-center gap-2 rounded-lg px-2 text-xs hover:bg-gray-50/40 dark:hover:bg-white/4 transition disabled:opacity-40 disabled:hover:bg-transparent"
+						class="{menuItemClass} disabled:opacity-40 disabled:hover:bg-transparent"
 						disabled={!canMutate}
 						on:click={(e) => {
 							e.stopPropagation();

@@ -30,6 +30,9 @@
 	import Tooltip from '$lib/components/common/Tooltip.svelte';
 
 	const i18n = getContext<Writable<i18nType>>('i18n');
+	const markdown = getContext<{ allowRemoteContent: boolean; document?: boolean } | undefined>(
+		'markdown'
+	);
 
 	export let id = '';
 	export let edit = true;
@@ -62,7 +65,7 @@
 	let _token = null;
 
 	let renderHTML = null;
-	let renderError = null;
+	let renderError: { type: 'diagram' | 'visualization'; detail: string } | null = null;
 
 	let highlightedCode = null;
 	let executing = false;
@@ -235,7 +238,9 @@
 			/\bimport\s+tiktoken\b|\bfrom\s+tiktoken\b/.test(code) ? 'tiktoken' : null,
 			/\bimport\s+pytz\b|\bfrom\s+pytz\b/.test(code) ? 'pytz' : null,
 			/\bimport\s+openpyxl\b|\bfrom\s+openpyxl\b/.test(code) ? 'openpyxl' : null,
-			/\.(read|to)_excel\(|\.Excel(Writer|File)\(/.test(code) ? 'openpyxl' : null
+			/\.(read|to)_excel\(|\.Excel(Writer|File)\(/.test(code) ? 'openpyxl' : null,
+			/\bimport\s+pptx\b|\bfrom\s+pptx\b/.test(code) ? 'python-pptx' : null,
+			/\bimport\s+docx\b|\bfrom\s+docx\b/.test(code) ? 'python-docx' : null
 		].filter(Boolean);
 
 		console.log(packages);
@@ -306,7 +311,7 @@
 				}
 			}
 
-			if (data['result']) {
+			if (typeof data['result'] === 'string') {
 				result = data['result'];
 				const resultLines = result.split('\n');
 
@@ -366,25 +371,29 @@
 
 	const render = async () => {
 		onUpdate(token, id);
-		if (lang === 'mermaid' && (token?.raw ?? '').slice(-4).includes('```')) {
+		if (markdown?.allowRemoteContent === false) return;
+		if (
+			lang === 'mermaid' &&
+			(markdown?.document || (token?.raw ?? '').slice(-4).includes('```'))
+		) {
 			try {
 				renderHTML = await renderMermaid(code);
 			} catch (error) {
 				console.error('Failed to render mermaid diagram:', error);
 				const errorMsg = error instanceof Error ? error.message : String(error);
-				renderError = $i18n.t('Failed to render diagram') + `: ${errorMsg}`;
+				renderError = { type: 'diagram', detail: errorMsg };
 				renderHTML = null;
 			}
 		} else if (
 			(lang === 'vega' || lang === 'vega-lite') &&
-			(token?.raw ?? '').slice(-4).includes('```')
+			(markdown?.document || (token?.raw ?? '').slice(-4).includes('```'))
 		) {
 			try {
 				renderHTML = await renderVegaVisualization(code, lang);
 			} catch (error) {
 				console.error('Failed to render Vega visualization:', error);
 				const errorMsg = error instanceof Error ? error.message : String(error);
-				renderError = $i18n.t('Failed to render visualization') + `: ${errorMsg}`;
+				renderError = { type: 'visualization', detail: errorMsg };
 				renderHTML = null;
 			}
 		}
@@ -438,7 +447,7 @@
 		class="relative {className} flex flex-col rounded-2xl border border-gray-100/30 dark:border-gray-850/30 my-0.5 overflow-clip"
 		dir="ltr"
 	>
-		{#if ['mermaid', 'vega', 'vega-lite'].includes(lang)}
+		{#if markdown?.allowRemoteContent !== false && ['mermaid', 'vega', 'vega-lite'].includes(lang)}
 			{#if renderHTML}
 				<SvgPanZoom
 					className=" rounded-2xl max-h-fit overflow-hidden"
@@ -451,7 +460,9 @@
 						<div
 							class="flex gap-2.5 border px-4 py-3 border-red-600/10 bg-red-600/10 rounded-2xl mb-2"
 						>
-							{renderError}
+							{renderError.type === 'diagram'
+								? $i18n.t('Failed to render diagram')
+								: $i18n.t('Failed to render visualization')}: {renderError.detail}
 						</div>
 					{/if}
 					<pre>{code}</pre>
@@ -469,10 +480,10 @@
 					</Tooltip>
 				</div>
 
-				<div class="flex items-center gap-0.5 shrink-0">
+				<div class="flex max-w-full items-center gap-0.5 shrink-0 overflow-x-auto">
 					{#if isDiff && edit}
 						<button
-							class="bg-none border-none transition rounded-md px-1.5 py-0.5 bg-white dark:bg-black"
+							class="flex h-7 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2.5 text-xs font-normal text-gray-600 transition hover:bg-gray-100 hover:text-gray-900 disabled:opacity-60 dark:text-gray-400 dark:hover:bg-gray-850 dark:hover:text-white"
 							aria-pressed={editingDiff}
 							on:click={() => {
 								editingDiff = !editingDiff;
@@ -483,7 +494,7 @@
 						</button>
 					{/if}
 					<button
-						class="flex gap-1 items-center bg-none border-none transition rounded-md px-1.5 py-0.5 bg-white dark:bg-black"
+						class="flex h-7 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2.5 text-xs font-normal text-gray-600 transition hover:bg-gray-100 hover:text-gray-900 disabled:opacity-60 dark:text-gray-400 dark:hover:bg-gray-850 dark:hover:text-white"
 						on:click={collapseCodeBlock}
 					>
 						<div class=" -translate-y-[0.5px]">
@@ -498,13 +509,13 @@
 					{#if ($config?.features?.enable_code_execution ?? true) && (lang.toLowerCase() === 'python' || lang.toLowerCase() === 'py' || (lang === '' && checkPythonCode(code)))}
 						{#if executing}
 							<div
-								class="run-code-button bg-none border-none p-0.5 cursor-not-allowed bg-white dark:bg-black"
+								class="run-code-button flex h-7 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2.5 text-xs font-normal text-gray-600 transition hover:bg-gray-100 hover:text-gray-900 disabled:opacity-60 dark:text-gray-400 dark:hover:bg-gray-850 dark:hover:text-white cursor-not-allowed opacity-60"
 							>
 								{$i18n.t('Running')}
 							</div>
-						{:else if run}
+						{:else if run && markdown?.allowRemoteContent !== false}
 							<button
-								class="flex gap-1 items-center run-code-button bg-none border-none transition rounded-md px-1.5 py-0.5 bg-white dark:bg-black"
+								class="run-code-button flex h-7 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2.5 text-xs font-normal text-gray-600 transition hover:bg-gray-100 hover:text-gray-900 disabled:opacity-60 dark:text-gray-400 dark:hover:bg-gray-850 dark:hover:text-white"
 								on:click={async () => {
 									code = _code;
 									await tick();
@@ -520,7 +531,7 @@
 
 					{#if save}
 						<button
-							class="save-code-button bg-none border-none transition rounded-md px-1.5 py-0.5 bg-white dark:bg-black"
+							class="save-code-button flex h-7 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2.5 text-xs font-normal text-gray-600 transition hover:bg-gray-100 hover:text-gray-900 disabled:opacity-60 dark:text-gray-400 dark:hover:bg-gray-850 dark:hover:text-white"
 							on:click={saveCode}
 						>
 							{saved ? $i18n.t('Saved') : $i18n.t('Save')}
@@ -528,13 +539,13 @@
 					{/if}
 
 					<button
-						class="copy-code-button bg-none border-none transition rounded-md px-1.5 py-0.5 bg-white dark:bg-black"
+						class="copy-code-button flex h-7 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2.5 text-xs font-normal text-gray-600 transition hover:bg-gray-100 hover:text-gray-900 disabled:opacity-60 dark:text-gray-400 dark:hover:bg-gray-850 dark:hover:text-white"
 						on:click={copyCode}>{copied ? $i18n.t('Copied') : $i18n.t('Copy')}</button
 					>
 
 					{#if preview && ['html', 'svg'].includes(lang)}
 						<button
-							class="flex gap-1 items-center run-code-button bg-none border-none transition rounded-md px-1.5 py-0.5 bg-white dark:bg-black"
+							class="run-code-button flex h-7 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2.5 text-xs font-normal text-gray-600 transition hover:bg-gray-100 hover:text-gray-900 disabled:opacity-60 dark:text-gray-400 dark:hover:bg-gray-850 dark:hover:text-white"
 							on:click={previewCode}
 						>
 							<div>

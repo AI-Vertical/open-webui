@@ -7,7 +7,7 @@ from open_webui.config import BYPASS_ADMIN_ACCESS_CONTROL
 from open_webui.constants import ERROR_MESSAGES
 from open_webui.events import EVENTS, publish_event
 from open_webui.internal.db import get_async_session
-from open_webui.models.access_grants import AccessGrants
+from open_webui.models.access_grants import AccessGrants, normalize_access_grants
 from open_webui.models.config import Config
 from open_webui.models.groups import Groups
 from open_webui.models.prompt_history import (
@@ -97,7 +97,7 @@ async def get_prompt_list(
         filter['direction'] = direction
 
     # Pre-fetch user group IDs once - used for both filter and write_access check
-    groups = await Groups.get_groups_by_member_id(user.id, db=db)
+    groups = await Groups.get_groups_by_member_id(user.id, db=db, include_inherited=True)
     user_group_ids = {group.id for group in groups}
 
     if not (user.role == 'admin' and BYPASS_ADMIN_ACCESS_CONTROL):
@@ -289,13 +289,28 @@ async def update_prompt_by_id(
                 detail=ERROR_MESSAGES.COMMAND_TAKEN,
             )
 
-    form_data.access_grants = await filter_allowed_access_grants(
-        await Config.get('user.permissions'),
-        user.id,
-        user.role,
-        form_data.access_grants,
-        'sharing.public_prompts',
-    )
+    if form_data.access_grants is not None:
+        existing_access_grants = {
+            (grant.principal_type, grant.principal_id, grant.permission) for grant in prompt.access_grants
+        }
+        submitted_access_grants_map = {
+            (grant['principal_type'], grant['principal_id'], grant['permission']): grant
+            for grant in normalize_access_grants(form_data.access_grants)
+        }
+        preserved_access_grants = [
+            grant for key, grant in submitted_access_grants_map.items() if key in existing_access_grants
+        ]
+        new_access_grants = [
+            grant for key, grant in submitted_access_grants_map.items() if key not in existing_access_grants
+        ]
+
+        form_data.access_grants = preserved_access_grants + await filter_allowed_access_grants(
+            await Config.get('user.permissions'),
+            user.id,
+            user.role,
+            new_access_grants,
+            'sharing.public_prompts',
+        )
 
     # Use the ID from the found prompt
     updated_prompt = await Prompts.update_prompt_by_id(prompt.id, form_data, user.id, db=db)
@@ -635,6 +650,50 @@ async def get_prompt_history(
     return history
 
 
+@router.get('/id/{prompt_id}/history/diff')
+async def get_prompt_diff(
+    prompt_id: str,
+    from_id: str,
+    to_id: str,
+    user=Depends(get_verified_user),
+    db: AsyncSession = Depends(get_async_session),
+):
+    """Get diff between two versions."""
+    prompt = await Prompts.get_prompt_by_id(prompt_id, db=db)
+
+    if not prompt:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=ERROR_MESSAGES.NOT_FOUND,
+        )
+
+    # Check read access
+    if not (
+        user.role == 'admin'
+        or prompt.user_id == user.id
+        or await AccessGrants.has_access(
+            user_id=user.id,
+            resource_type='prompt',
+            resource_id=prompt.id,
+            permission='read',
+            db=db,
+        )
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=ERROR_MESSAGES.ACCESS_PROHIBITED,
+        )
+
+    diff = await PromptHistories.compute_diff(from_id, to_id, prompt.id, db=db)
+    if not diff:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=ERROR_MESSAGES.NOT_FOUND,
+        )
+
+    return diff
+
+
 @router.get('/id/{prompt_id}/history/{history_id}', response_model=PromptHistoryModel)
 async def get_prompt_history_entry(
     prompt_id: str,
@@ -726,47 +785,3 @@ async def delete_prompt_history_entry(
         )
 
     return success
-
-
-@router.get('/id/{prompt_id}/history/diff')
-async def get_prompt_diff(
-    prompt_id: str,
-    from_id: str,
-    to_id: str,
-    user=Depends(get_verified_user),
-    db: AsyncSession = Depends(get_async_session),
-):
-    """Get diff between two versions."""
-    prompt = await Prompts.get_prompt_by_id(prompt_id, db=db)
-
-    if not prompt:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=ERROR_MESSAGES.NOT_FOUND,
-        )
-
-    # Check read access
-    if not (
-        user.role == 'admin'
-        or prompt.user_id == user.id
-        or await AccessGrants.has_access(
-            user_id=user.id,
-            resource_type='prompt',
-            resource_id=prompt.id,
-            permission='read',
-            db=db,
-        )
-    ):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail=ERROR_MESSAGES.ACCESS_PROHIBITED,
-        )
-
-    diff = await PromptHistories.compute_diff(from_id, to_id, prompt.id, db=db)
-    if not diff:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=ERROR_MESSAGES.NOT_FOUND,
-        )
-
-    return diff

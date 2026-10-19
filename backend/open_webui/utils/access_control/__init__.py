@@ -1,4 +1,5 @@
 import logging
+from copy import deepcopy
 from typing import Any
 
 from open_webui.config import DEFAULT_USER_PERMISSIONS
@@ -12,7 +13,6 @@ from open_webui.models.access_grants import (
 )
 from open_webui.models.groups import Groups
 from open_webui.models.users import UserModel
-from open_webui.utils.json_codec import JSONCodec
 from sqlalchemy.ext.asyncio import AsyncSession
 
 log = logging.getLogger(__name__)
@@ -25,10 +25,25 @@ def fill_missing_permissions(permissions: dict[str, Any], default_permissions: d
     """
     for key, value in default_permissions.items():
         if key not in permissions:
-            permissions[key] = value
+            permissions[key] = deepcopy(value)
         elif isinstance(value, dict) and isinstance(permissions[key], dict):  # Both are nested dictionaries
             permissions[key] = fill_missing_permissions(permissions[key], value)
 
+    return permissions
+
+
+def combine_permissions(permissions: dict[str, Any], group_permissions: dict[str, Any]) -> dict[str, Any]:
+    """Combine permissions from multiple groups by taking the most permissive value."""
+    for key, value in group_permissions.items():
+        if isinstance(value, dict):
+            if key not in permissions:
+                permissions[key] = {}
+            permissions[key] = combine_permissions(permissions[key], value)
+        else:
+            if key not in permissions:
+                permissions[key] = value
+            else:
+                permissions[key] = permissions[key] or value  # Use the most permissive value (True > False)
     return permissions
 
 
@@ -43,31 +58,14 @@ async def get_permissions(
     Permissions are nested in a dict with the permission key as the key and a boolean as the value.
     """
 
-    def combine_permissions(permissions: dict[str, Any], group_permissions: dict[str, Any]) -> dict[str, Any]:
-        """Combine permissions from multiple groups by taking the most permissive value."""
-        for key, value in group_permissions.items():
-            if isinstance(value, dict):
-                if key not in permissions:
-                    permissions[key] = {}
-                permissions[key] = combine_permissions(permissions[key], value)
-            else:
-                if key not in permissions:
-                    permissions[key] = value
-                else:
-                    permissions[key] = permissions[key] or value  # Use the most permissive value (True > False)
-        return permissions
-
-    user_groups = await Groups.get_groups_by_member_id(user_id, db=db)
+    user_groups = await Groups.get_groups_by_member_id(user_id, db=db, include_inherited=True)
 
     # Deep copy default permissions to avoid modifying the original dict
-    permissions = JSONCodec.loads(JSONCodec.dumps(default_permissions))
+    permissions = fill_missing_permissions(deepcopy(default_permissions or {}), DEFAULT_USER_PERMISSIONS)
 
     # Combine permissions from all user groups
     for group in user_groups:
         permissions = combine_permissions(permissions, group.permissions or {})
-
-    # Ensure all fields from default_permissions are present and filled in
-    permissions = fill_missing_permissions(permissions, default_permissions)
 
     return permissions
 
@@ -97,14 +95,14 @@ async def has_permission(
     permission_hierarchy = permission_key.split('.')
 
     # Retrieve user group permissions
-    user_groups = await Groups.get_groups_by_member_id(user_id, db=db)
+    user_groups = await Groups.get_groups_by_member_id(user_id, db=db, include_inherited=True)
 
     for group in user_groups:
         if get_permission(group.permissions or {}, permission_hierarchy):
             return True
 
     # Check default permissions afterward if the group permissions don't allow it
-    default_permissions = fill_missing_permissions(default_permissions, DEFAULT_USER_PERMISSIONS)
+    default_permissions = fill_missing_permissions(deepcopy(default_permissions or {}), DEFAULT_USER_PERMISSIONS)
     return get_permission(default_permissions, permission_hierarchy)
 
 
@@ -130,7 +128,7 @@ async def has_access(
         return False
 
     if user_group_ids is None:
-        user_groups = await Groups.get_groups_by_member_id(user_id, db=db)
+        user_groups = await Groups.get_groups_by_member_id(user_id, db=db, include_inherited=True)
         user_group_ids = {group.id for group in user_groups}
 
     for grant in access_grants:
@@ -174,7 +172,7 @@ async def has_connection_access(
         return user.role == 'admin'
 
     if user_group_ids is None:
-        user_group_ids = {group.id for group in await Groups.get_groups_by_member_id(user.id)}
+        user_group_ids = {group.id for group in await Groups.get_groups_by_member_id(user.id, include_inherited=True)}
 
     return await has_access(user.id, 'read', access_grants, user_group_ids)
 
@@ -386,7 +384,9 @@ async def check_model_access(
         if user.role != 'admin':
             from open_webui.models.access_grants import AccessGrants
 
-            user_group_ids = {group.id for group in await Groups.get_groups_by_member_id(user.id)}
+            user_group_ids = {
+                group.id for group in await Groups.get_groups_by_member_id(user.id, include_inherited=True)
+            }
             if not (
                 user.id == model_info.user_id
                 or await AccessGrants.has_access(
