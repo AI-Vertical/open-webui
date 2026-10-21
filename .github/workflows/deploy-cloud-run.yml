@@ -92,10 +92,9 @@ jobs:
           gcloud run deploy "${SERVICE}" \
             --project="${PROJECT_ID}" \
             --region="${REGION}" \
-            --update-env-vars= "USER_PERMISSIONS_WORKSPACE_MODELS_ACCESS=true, USER_PERMISSIONS_WORKSPACE_KNOWLEDGE_ACCESS=true, USER_PERMISSIONS_WORKSPACE_PROMPTS_ACCESS=true,USER_PERMISSIONS_WORKSPACE_TOOLS_ACCESS=true" \          
+            --update-env-vars="USER_PERMISSIONS_WORKSPACE_MODELS_ACCESS=true,USER_PERMISSIONS_WORKSPACE_KNOWLEDGE_ACCESS=true,USER_PERMISSIONS_WORKSPACE_PROMPTS_ACCESS=true,USER_PERMISSIONS_WORKSPACE_TOOLS_ACCESS=true" \
             --image="${{ steps.image.outputs.IMAGE }}" \
             --quiet
-
       # -------------------------------
       # 9. Show deployment
       # -------------------------------
