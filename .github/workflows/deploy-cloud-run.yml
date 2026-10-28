@@ -5,7 +5,7 @@ on:
     types:
       - closed
     branches:
-      - main
+      - conf-test
   workflow_dispatch:
     inputs:
       mode:
