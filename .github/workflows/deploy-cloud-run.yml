@@ -7,6 +7,16 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      mode:
+        description: deploy updates the image only; snapshot-config dumps live Cloud Run env; snapshot-code dumps env.py/config.py keys
+        required: true
+        default: deploy
+        type: choice
+        options:
+          - deploy
+          - snapshot-config
+          - snapshot-code
 
 env:
   PROJECT_ID: employee-ai-508209
@@ -16,87 +26,153 @@ env:
   IMAGE_NAME: open-web-ui
 
 jobs:
-  deploy:
-    name: Build and Deploy Open WebUI
+  snapshot-config:
+    name: Snapshot Cloud Run config
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'snapshot-config'
     runs-on: ubuntu-latest
-
     steps:
-
-      # -------------------------------
-      # 1. Checkout
-      # -------------------------------
       - name: Checkout source
         uses: actions/checkout@v7
 
-      # -------------------------------
-      # 2. Authenticate using SA key
-      # -------------------------------
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v3
         with:
           credentials_json: '${{ secrets.GCP_SA_KEY }}'
           project_id: ${{ env.PROJECT_ID }}
 
-      # -------------------------------
-      # 3. Setup gcloud
-      # -------------------------------
       - name: Setup Google Cloud
         uses: google-github-actions/setup-gcloud@v3
         with:
           project_id: ${{ env.PROJECT_ID }}
 
-      # -------------------------------
-      # 4. Configure Docker
-      # -------------------------------
+      - name: Install validator deps
+        run: python3 -m pip install --quiet pyyaml
+
+      - name: Dump live Cloud Run env
+        run: |
+          python3 scripts/validate-config.py snapshot --write
+          mkdir -p artifacts
+          cp protected-config.yml artifacts/protected-config.yml
+
+      - name: Upload lockfile artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: protected-config
+          path: artifacts/protected-config.yml
+
+      - name: Next step
+        run: |
+          {
+            echo "## Protected config snapshot"
+            echo "Download the \`protected-config\` artifact, replace \`protected-config.yml\` in the repo, and commit it."
+            echo "Until that file matches live Cloud Run, deploys will fail on purpose."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  snapshot-code:
+    name: Snapshot env.py/config.py keys
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'snapshot-code'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v7
+
+      - name: Install validator deps
+        run: python3 -m pip install --quiet pyyaml
+
+      - name: Dump env.py/config.py getenv inventory
+        run: |
+          python3 scripts/validate-config.py snapshot-code --write
+          mkdir -p artifacts
+          cp config-code-lock.yml artifacts/config-code-lock.yml
+
+      - name: Upload code lockfile artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: config-code-lock
+          path: artifacts/config-code-lock.yml
+
+      - name: Next step
+        run: |
+          {
+            echo "## Config code snapshot"
+            echo "Download the \`config-code-lock\` artifact, replace \`config-code-lock.yml\`, inspect the diff, and commit only if the upstream change is acceptable."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  deploy:
+    name: Build and Deploy Open WebUI
+    if: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'deploy') || (github.event_name == 'pull_request' && github.event.pull_request.merged == true) }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v7
+
+      - name: Install validator deps
+        run: python3 -m pip install --quiet pyyaml
+
+      - name: Check env.py/config.py keys and defaults
+        run: python3 scripts/validate-config.py check-code
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v3
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+          project_id: ${{ env.PROJECT_ID }}
+
+      - name: Setup Google Cloud
+        uses: google-github-actions/setup-gcloud@v3
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+
+      - name: Check serving Cloud Run config
+        run: python3 scripts/validate-config.py check
+
       - name: Configure Docker
         run: |
           gcloud auth configure-docker \
             ${REGION}-docker.pkg.dev \
             --quiet
 
-      # -------------------------------
-      # 5. Create image tag
-      # -------------------------------
       - name: Set image
         id: image
         run: |
           IMAGE="${REGION}-docker.pkg.dev/${PROJECT_ID}/${AR_REPOSITORY}/${IMAGE_NAME}:${GITHUB_SHA}"
-
           echo "IMAGE=${IMAGE}" >> "$GITHUB_OUTPUT"
-
           echo "Building image:"
           echo "${IMAGE}"
 
-      # -------------------------------
-      # 6. Build
-      # -------------------------------
       - name: Build Docker image
         run: |
           docker build \
             -t "${{ steps.image.outputs.IMAGE }}" \
             .
 
-      # -------------------------------
-      # 7. Push
-      # -------------------------------
       - name: Push Docker image
         run: |
           docker push "${{ steps.image.outputs.IMAGE }}"
 
-      # -------------------------------
-      # 8. Deploy directly to existing
-      #    Cloud Run service
-      # -------------------------------
-      - name: Deploy to Cloud Run
+      # Image only. Do not add --set-env-vars, --clear-env-vars,
+      # --set-secrets, --clear-secrets, or --env-vars-file.
+      - name: Deploy new revision without traffic
         run: |
           gcloud run deploy "${SERVICE}" \
             --project="${PROJECT_ID}" \
             --region="${REGION}" \
             --image="${{ steps.image.outputs.IMAGE }}" \
+            --no-traffic \
             --quiet
-      # -------------------------------
-      # 9. Show deployment
-      # -------------------------------
+
+      - name: Check new revision config
+        run: python3 scripts/validate-config.py check --latest-revision
+
+      - name: Shift traffic to new revision
+        run: |
+          gcloud run services update-traffic "${SERVICE}" \
+            --project="${PROJECT_ID}" \
+            --region="${REGION}" \
+            --to-latest \
+            --quiet
+
       - name: Show deployed revision
         run: |
           gcloud run services describe "${SERVICE}" \

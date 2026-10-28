@@ -1,0 +1,4370 @@
+source_files:
+- backend/open_webui/env.py
+- backend/open_webui/config.py
+keys:
+  ADMIN_EMAIL:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  AIOHTTP_CLIENT_ALLOW_REDIRECTS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  AIOHTTP_CLIENT_ASYNC_DNS_RESOLVER:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  AIOHTTP_CLIENT_SESSION_SSL:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  AIOHTTP_CLIENT_SESSION_TOOL_SERVER_SSL:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  AIOHTTP_CLIENT_SSL_CERT_FILE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  AIOHTTP_CLIENT_STREAM_IDLE_TIMEOUT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  AIOHTTP_CLIENT_TIMEOUT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  AIOHTTP_CLIENT_TIMEOUT_MODEL_LIST:
+    defaults:
+    - os.getenv('AIOHTTP_CLIENT_TIMEOUT_OPENAI_MODEL_LIST', '10'),
+    files:
+    - backend/open_webui/env.py
+  AIOHTTP_CLIENT_TIMEOUT_OPENAI_MODEL_LIST:
+    defaults:
+    - '''10'''
+    files:
+    - backend/open_webui/env.py
+  AIOHTTP_CLIENT_TIMEOUT_TOOL_SERVER:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  AIOHTTP_CLIENT_TIMEOUT_TOOL_SERVER_DATA:
+    defaults:
+    - '''10'''
+    files:
+    - backend/open_webui/env.py
+  AIOHTTP_FILE_STREAM_CHUNK_SIZE:
+    defaults:
+    - str(1024 * 1024)
+    files:
+    - backend/open_webui/env.py
+  AIOHTTP_POOL_CONNECTIONS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  AIOHTTP_POOL_CONNECTIONS_PER_HOST:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  AIOHTTP_POOL_DNS_TTL:
+    defaults:
+    - '''300'''
+    files:
+    - backend/open_webui/env.py
+  API_KEYS_ALLOWED_ENDPOINTS:
+    defaults:
+    - os.getenv('API_KEY_ALLOWED_ENDPOINTS', '')
+    files:
+    - backend/open_webui/config.py
+  API_KEY_ALLOWED_ENDPOINTS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_STT_ALLOWED_EXTENSIONS:
+    defaults:
+    - '''mp3,wav,m4a,webm,ogg,flac,mp4,mpga,mpeg'','
+    files:
+    - backend/open_webui/config.py
+  AUDIO_STT_AZURE_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_STT_AZURE_BASE_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_STT_AZURE_LOCALES:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_STT_AZURE_MAX_SPEAKERS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_STT_AZURE_REGION:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_STT_ENGINE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_STT_MISTRAL_API_BASE_URL:
+    defaults:
+    - '''https://api.mistral.ai/v1'''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_STT_MISTRAL_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_STT_MISTRAL_USE_CHAT_COMPLETIONS:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_STT_MODEL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_STT_OPENAI_API_BASE_URL:
+    defaults:
+    - OPENAI_API_BASE_URL
+    files:
+    - backend/open_webui/config.py
+  AUDIO_STT_OPENAI_API_KEY:
+    defaults:
+    - OPENAI_API_KEY
+    files:
+    - backend/open_webui/config.py
+  AUDIO_STT_OPENAI_API_REQUEST_FORMAT:
+    defaults:
+    - '''multipart'''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_STT_SUPPORTED_CONTENT_TYPES:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_TTS_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_TTS_AZURE_SPEECH_BASE_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_TTS_AZURE_SPEECH_OUTPUT_FORMAT:
+    defaults:
+    - '''audio-24khz-160kbitrate-mono-mp3'''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_TTS_AZURE_SPEECH_REGION:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_TTS_ENGINE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_TTS_MISTRAL_API_BASE_URL:
+    defaults:
+    - '''https://api.mistral.ai/v1'''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_TTS_MISTRAL_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_TTS_MODEL:
+    defaults:
+    - '''tts-1'''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_TTS_OPENAI_API_BASE_URL:
+    defaults:
+    - OPENAI_API_BASE_URL
+    files:
+    - backend/open_webui/config.py
+  AUDIO_TTS_OPENAI_API_KEY:
+    defaults:
+    - OPENAI_API_KEY
+    files:
+    - backend/open_webui/config.py
+  AUDIO_TTS_OPENAI_PARAMS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_TTS_SPLIT_ON:
+    defaults:
+    - '''punctuation'''
+    files:
+    - backend/open_webui/config.py
+  AUDIO_TTS_VOICE:
+    defaults:
+    - '''alloy'''
+    files:
+    - backend/open_webui/config.py
+  AUDIT_EXCLUDED_PATHS:
+    defaults:
+    - '''/chats,/chat,/folders'''
+    files:
+    - backend/open_webui/env.py
+  AUDIT_INCLUDED_PATHS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  AUDIT_LOGS_FILE_PATH:
+    defaults:
+    - f'{DATA_DIR}/audit.log'
+    files:
+    - backend/open_webui/env.py
+  AUDIT_LOG_FILE_ROTATION_SIZE:
+    defaults:
+    - '''10MB'''
+    files:
+    - backend/open_webui/env.py
+  AUDIT_LOG_LEVEL:
+    defaults:
+    - '''NONE'''
+    files:
+    - backend/open_webui/env.py
+  AUDIT_UVICORN_LOGGER_NAMES:
+    defaults:
+    - '''uvicorn.access'''
+    files:
+    - backend/open_webui/env.py
+  AUTOCOMPLETE_GENERATION_INPUT_MAX_LENGTH:
+    defaults:
+    - '''-1'''
+    files:
+    - backend/open_webui/config.py
+  AUTOCOMPLETE_GENERATION_PROMPT_TEMPLATE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUTOMATIC1111_API_AUTH:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUTOMATIC1111_BASE_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUTOMATIC1111_PARAMS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUTOMATION_AUTH_TOKEN_EXPIRES_IN:
+    defaults:
+    - '''1h'''
+    files:
+    - backend/open_webui/config.py
+  AUTOMATION_MAX_COUNT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AUTOMATION_MIN_INTERVAL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AZURE_AI_SEARCH_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AZURE_AI_SEARCH_ENDPOINT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AZURE_AI_SEARCH_INDEX_NAME:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  AZURE_STORAGE_CONTAINER_NAME:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  AZURE_STORAGE_ENDPOINT:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  AZURE_STORAGE_KEY:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  BING_SEARCH_V7_ENDPOINT:
+    defaults:
+    - '''https://api.bing.microsoft.com/v7.0/search'''
+    files:
+    - backend/open_webui/config.py
+  BING_SEARCH_V7_SUBSCRIPTION_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  BOCHA_SEARCH_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  BRAVE_SEARCH_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  BRAVE_SEARCH_CONTEXT_TOKENS:
+    defaults:
+    - '''8192'''
+    files:
+    - backend/open_webui/config.py
+  BYPASS_ADMIN_ACCESS_CONTROL:
+    defaults:
+    - os.getenv('ENABLE_ADMIN_WORKSPACE_CONTENT_ACCESS', 'True'),
+    files:
+    - backend/open_webui/config.py
+  BYPASS_EMBEDDING_AND_RETRIEVAL:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  BYPASS_MODEL_ACCESS_CONTROL:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  BYPASS_PYDUB_PREPROCESSING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  BYPASS_RETRIEVAL_ACCESS_CONTROL:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  BYPASS_WEB_SEARCH_EMBEDDING_AND_RETRIEVAL:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  BYPASS_WEB_SEARCH_WEB_LOADER:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  CHANNEL_MODEL_RESPONSE_MODE:
+    defaults:
+    - '''thread'''
+    files:
+    - backend/open_webui/config.py
+  CHAT_RESPONSE_MAX_TOOL_CALL_ITERATIONS:
+    defaults:
+    - os.getenv('CHAT_RESPONSE_MAX_TOOL_CALL_RETRIES', '256'),
+    files:
+    - backend/open_webui/env.py
+  CHAT_RESPONSE_MAX_TOOL_CALL_RETRIES:
+    defaults:
+    - '''256'''
+    files:
+    - backend/open_webui/env.py
+  CHAT_RESPONSE_STREAM_DELTA_CHUNK_SIZE:
+    defaults:
+    - '''1'''
+    files:
+    - backend/open_webui/env.py
+  CHAT_STREAM_RESPONSE_CHUNK_MAX_BUFFER_SIZE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  CHROMA_CLIENT_AUTH_CREDENTIALS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  CHROMA_CLIENT_AUTH_PROVIDER:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  CHROMA_DATABASE:
+    defaults:
+    - chromadb.DEFAULT_DATABASE
+    files:
+    - backend/open_webui/config.py
+  CHROMA_HTTP_HEADERS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  CHROMA_HTTP_HOST:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  CHROMA_HTTP_PORT:
+    defaults:
+    - '''8000'''
+    files:
+    - backend/open_webui/config.py
+  CHROMA_HTTP_SSL:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  CHROMA_TENANT:
+    defaults:
+    - chromadb.DEFAULT_TENANT
+    files:
+    - backend/open_webui/config.py
+  CHUNK_MIN_SIZE_TARGET:
+    defaults:
+    - '''0'''
+    files:
+    - backend/open_webui/config.py
+  CHUNK_OVERLAP:
+    defaults:
+    - '''100'''
+    files:
+    - backend/open_webui/config.py
+  CHUNK_SIZE:
+    defaults:
+    - '''1000'''
+    files:
+    - backend/open_webui/config.py
+  CODE_EXECUTION_ENGINE:
+    defaults:
+    - '''pyodide'''
+    files:
+    - backend/open_webui/config.py
+  CODE_EXECUTION_JUPYTER_AUTH:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  CODE_EXECUTION_JUPYTER_AUTH_PASSWORD:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  CODE_EXECUTION_JUPYTER_AUTH_TOKEN:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  CODE_EXECUTION_JUPYTER_TIMEOUT:
+    defaults:
+    - '''60'''
+    files:
+    - backend/open_webui/config.py
+  CODE_EXECUTION_JUPYTER_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  CODE_INTERPRETER_BLOCKED_MODULES:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  CODE_INTERPRETER_ENGINE:
+    defaults:
+    - '''pyodide'''
+    files:
+    - backend/open_webui/config.py
+  CODE_INTERPRETER_JUPYTER_AUTH:
+    defaults:
+    - os.getenv('CODE_EXECUTION_JUPYTER_AUTH', ''),
+    files:
+    - backend/open_webui/config.py
+  CODE_INTERPRETER_JUPYTER_AUTH_PASSWORD:
+    defaults:
+    - os.getenv('CODE_EXECUTION_JUPYTER_AUTH_PASSWORD', ''),
+    files:
+    - backend/open_webui/config.py
+  CODE_INTERPRETER_JUPYTER_AUTH_TOKEN:
+    defaults:
+    - os.getenv('CODE_EXECUTION_JUPYTER_AUTH_TOKEN', ''),
+    files:
+    - backend/open_webui/config.py
+  CODE_INTERPRETER_JUPYTER_TIMEOUT:
+    defaults:
+    - os.getenv('CODE_EXECUTION_JUPYTER_TIMEOUT', '60'),
+    files:
+    - backend/open_webui/config.py
+  CODE_INTERPRETER_JUPYTER_URL:
+    defaults:
+    - os.getenv('CODE_EXECUTION_JUPYTER_URL', '')
+    files:
+    - backend/open_webui/config.py
+  CODE_INTERPRETER_PROMPT_TEMPLATE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  COMFYUI_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  COMFYUI_BASE_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  COMFYUI_WORKFLOW:
+    defaults:
+    - COMFYUI_DEFAULT_WORKFLOW
+    files:
+    - backend/open_webui/config.py
+  COMFYUI_WORKFLOW_NODES:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  CONTENT_EXTRACTION_ENGINE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  CONTENT_EXTRACTION_SUPPORTED_MEDIA_MIME_TYPES:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/config.py
+  CONTEXT_COMPACTION_MODEL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  CONTEXT_COMPACTION_PROMPT_TEMPLATE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  CONTEXT_COMPACTION_RETENTION_PERCENTAGE:
+    defaults:
+    - '''40'''
+    files:
+    - backend/open_webui/config.py
+  CONTEXT_COMPACTION_TOKEN_CAP:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/config.py
+  CONTEXT_COMPACTION_TOKEN_THRESHOLD:
+    defaults:
+    - '''80000'''
+    files:
+    - backend/open_webui/config.py
+  CORS_ALLOW_CUSTOM_SCHEME:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  CORS_ALLOW_ORIGIN:
+    defaults:
+    - '''*'''
+    files:
+    - backend/open_webui/config.py
+  CUSTOM_API_KEY_HEADER:
+    defaults:
+    - '''x-api-key'''
+    files:
+    - backend/open_webui/env.py
+  CUSTOM_NAME:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  DATABASE_ENABLE_IAM_TOKEN_AUTH:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  DATABASE_ENABLE_SESSION_SHARING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  DATABASE_ENABLE_SQLITE_WAL:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  DATABASE_HOST:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/env.py
+  DATABASE_NAME:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/env.py
+  DATABASE_PASSWORD:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/env.py
+  DATABASE_POOL_MAX_OVERFLOW:
+    defaults:
+    - '''0'''
+    files:
+    - backend/open_webui/env.py
+  DATABASE_POOL_RECYCLE:
+    defaults:
+    - '''3600'''
+    files:
+    - backend/open_webui/env.py
+  DATABASE_POOL_SIZE:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/env.py
+  DATABASE_POOL_TIMEOUT:
+    defaults:
+    - '''30'''
+    files:
+    - backend/open_webui/env.py
+  DATABASE_PORT:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/env.py
+  DATABASE_SCHEMA:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/env.py
+  DATABASE_SQLITE_PRAGMA_BUSY_TIMEOUT:
+    defaults:
+    - '''5000'''
+    files:
+    - backend/open_webui/env.py
+  DATABASE_SQLITE_PRAGMA_CACHE_SIZE:
+    defaults:
+    - '''-65536'''
+    files:
+    - backend/open_webui/env.py
+  DATABASE_SQLITE_PRAGMA_JOURNAL_SIZE_LIMIT:
+    defaults:
+    - '''67108864'''
+    files:
+    - backend/open_webui/env.py
+  DATABASE_SQLITE_PRAGMA_MMAP_SIZE:
+    defaults:
+    - '''268435456'''
+    files:
+    - backend/open_webui/env.py
+  DATABASE_SQLITE_PRAGMA_SYNCHRONOUS:
+    defaults:
+    - '''NORMAL'''
+    files:
+    - backend/open_webui/env.py
+  DATABASE_SQLITE_PRAGMA_TEMP_STORE:
+    defaults:
+    - '''MEMORY'''
+    files:
+    - backend/open_webui/env.py
+  DATABASE_TYPE:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/env.py
+  DATABASE_URL:
+    defaults:
+    - <unset>
+    - f'sqlite:///{DATA_DIR}/webui.db'
+    files:
+    - backend/open_webui/env.py
+  DATABASE_USER:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/env.py
+  DATABASE_USER_ACTIVE_STATUS_UPDATE_INTERVAL:
+    defaults:
+    - '''60'''
+    files:
+    - backend/open_webui/env.py
+  DATALAB_MARKER_ADDITIONAL_CONFIG:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  DATALAB_MARKER_API_BASE_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  DATALAB_MARKER_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  DATALAB_MARKER_DISABLE_IMAGE_EXTRACTION:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  DATALAB_MARKER_FORCE_OCR:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  DATALAB_MARKER_FORMAT_LINES:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  DATALAB_MARKER_OUTPUT_FORMAT:
+    defaults:
+    - '''markdown'''
+    files:
+    - backend/open_webui/config.py
+  DATALAB_MARKER_PAGINATE:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  DATALAB_MARKER_SKIP_CACHE:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  DATALAB_MARKER_STRIP_EXISTING_OCR:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  DATALAB_MARKER_USE_LLM:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  DATA_DIR:
+    defaults:
+    - BACKEND_DIR / 'data'
+    - OPEN_WEBUI_DIR / 'data'
+    files:
+    - backend/open_webui/env.py
+  DDGS_BACKEND:
+    defaults:
+    - '''auto'''
+    files:
+    - backend/open_webui/config.py
+  DEEPGRAM_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  DEFAULT_GROUP_ID:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  DEFAULT_GROUP_SHARE_PERMISSION:
+    defaults:
+    - '''members'''
+    files:
+    - backend/open_webui/env.py
+  DEFAULT_INTERFACE_SETTINGS:
+    defaults:
+    - '''{}'''
+    files:
+    - backend/open_webui/config.py
+  DEFAULT_LOCALE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  DEFAULT_MODELS:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  DEFAULT_MODEL_METADATA:
+    defaults:
+    - '''{}'''
+    files:
+    - backend/open_webui/config.py
+  DEFAULT_MODEL_PARAMS:
+    defaults:
+    - '''{}'''
+    files:
+    - backend/open_webui/config.py
+  DEFAULT_PINNED_MODELS:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  DEFAULT_PROMPT_SUGGESTIONS:
+    defaults:
+    - '''null'''
+    files:
+    - backend/open_webui/config.py
+  DEFAULT_USER_ROLE:
+    defaults:
+    - '''pending'''
+    files:
+    - backend/open_webui/config.py
+  DEPLOYMENT_ID:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  DOCKER:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  DOCLING_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  DOCLING_PARAMS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  DOCLING_SERVER_URL:
+    defaults:
+    - '''http://docling:5001'''
+    files:
+    - backend/open_webui/config.py
+  DOCUMENT_INTELLIGENCE_ENDPOINT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  DOCUMENT_INTELLIGENCE_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  DOCUMENT_INTELLIGENCE_MODEL:
+    defaults:
+    - '''prebuilt-layout'''
+    files:
+    - backend/open_webui/config.py
+  ELASTICSEARCH_API_KEY:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  ELASTICSEARCH_CA_CERTS:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  ELASTICSEARCH_CLOUD_ID:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  ELASTICSEARCH_INDEX_PREFIX:
+    defaults:
+    - '''open_webui_collections'''
+    files:
+    - backend/open_webui/config.py
+  ELASTICSEARCH_PASSWORD:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  ELASTICSEARCH_URL:
+    defaults:
+    - '''https://localhost:9200'''
+    files:
+    - backend/open_webui/config.py
+  ELASTICSEARCH_USERNAME:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  ELEVENLABS_API_BASE_URL:
+    defaults:
+    - '''https://api.elevenlabs.io'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_ADMIN_ANALYTICS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_ADMIN_CHAT_ACCESS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_ADMIN_EXPORT:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_ADMIN_WORKSPACE_CONTENT_ACCESS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_API_KEYS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_API_KEYS_ENDPOINT_RESTRICTIONS:
+    defaults:
+    - os.getenv('ENABLE_API_KEY_ENDPOINT_RESTRICTIONS', 'False'),
+    files:
+    - backend/open_webui/config.py
+  ENABLE_API_KEY_ENDPOINT_RESTRICTIONS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_API_OUTLET_FILTERS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_ASYNC_EMBEDDING:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_AUDIT_GET_REQUESTS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_AUDIT_LOGS_FILE:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_AUDIT_STDOUT:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_AUTOCOMPLETE_GENERATION:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_AUTOMATIONS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_BASE_MODELS_CACHE:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_CALENDAR:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_CHANNELS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_CHAT_RESPONSE_BASE64_IMAGE_URL_CONVERSION:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_CHAT_RESPONSE_STREAM_INPLACE_APPEND:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_CODE_EXECUTION:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_CODE_INTERPRETER:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_COMMUNITY_SHARING:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_COMPRESSION_MIDDLEWARE:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_CONTEXT_COMPACTION:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_CUSTOM_MODEL_FALLBACK:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_DB_MIGRATIONS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_DIRECT_CONNECTIONS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_DIRECT_INTEGRATIONS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_EASTER_EGGS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_EVALUATION_ARENA_MODELS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_FOLDERS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_FOLLOW_UP_GENERATION:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_FORWARD_USER_INFO_HEADERS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_GOOGLE_DRIVE_INTEGRATION:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_IMAGE_CONTENT_TYPE_EXTENSION_FALLBACK:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_IMAGE_EDIT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_IMAGE_GENERATION:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_IMAGE_PROMPT_GENERATION:
+    defaults:
+    - '''true'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_INITIAL_ADMIN_SIGNUP:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_KB_EXEC:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_KNOWLEDGE_FILE_RETENTION:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_LDAP:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_LDAP_GROUP_CREATION:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_LDAP_GROUP_MANAGEMENT:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_LOCAL_WEB_FETCH:
+    defaults:
+    - os.getenv('ENABLE_RAG_LOCAL_WEB_FETCH', 'False'),
+    files:
+    - backend/open_webui/config.py
+  ENABLE_LOGIN_FORM:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_MARKDOWN_HEADER_TEXT_SPLITTER:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_MEMORIES:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_MEMORY_BACKGROUND_REVIEW:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_MEMORY_SYSTEM_CONTEXT:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_MESSAGE_RATING:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_MILVUS_MULTITENANCY_MODE:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_NOTES:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_OAUTH:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_OAUTH_BACKCHANNEL_LOGOUT:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_OAUTH_EMAIL_FALLBACK:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_OAUTH_GROUP_CREATION:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_OAUTH_GROUP_MANAGEMENT:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_OAUTH_ID_TOKEN_COOKIE:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_OAUTH_PERSISTENT_CONFIG:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_OAUTH_ROLE_MANAGEMENT:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_OAUTH_SIGNUP:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_OAUTH_TOKEN_EXCHANGE:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_OLLAMA_API:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_ONEDRIVE_BUSINESS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_ONEDRIVE_INTEGRATION:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_ONEDRIVE_PERSONAL:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_OPENAI_API:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_OPENAI_API_PASSTHROUGH:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_OPENAI_IMAGE_EDIT_NORMALIZATION:
+    defaults:
+    - '''true'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_ORJSON:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_OTEL:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_OTEL_LOGS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_OTEL_METRICS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_OTEL_TRACES:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_PASSWORD_AUTH:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_PASSWORD_CHANGE_FORM:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_PASSWORD_VALIDATION:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_PERSISTENT_CONFIG:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_PIP_INSTALL_FRONTMATTER_REQUIREMENTS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_PLUGINS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_PROFILE_IMAGE_URL_FORWARDING:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_PUBLIC_ACTIVE_USERS_COUNT:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_PYODIDE_FILE_PERSISTENCE:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_QDRANT_MULTITENANCY_MODE:
+    defaults:
+    - '''true'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_QUERIES_CACHE:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_RAG_HYBRID_SEARCH:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_RAG_HYBRID_SEARCH_ENRICHED_TEXTS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_RAG_LOCAL_WEB_FETCH:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_REALTIME_CHAT_SAVE:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_RESPONSES_API_STATEFUL:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_RETRIEVAL_QUERY_GENERATION:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_RETRIEVAL_UNSCOPED_COLLECTIONS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_SCIM:
+    defaults:
+    - os.getenv('SCIM_ENABLED', 'False')
+    files:
+    - backend/open_webui/env.py
+  ENABLE_SEARCH_QUERY_GENERATION:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_SIGNUP:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_SIGNUP_PASSWORD_CONFIRMATION:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_STAR_SESSIONS_MIDDLEWARE:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_SUBAGENTS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_TAGS_GENERATION:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_TITLE_GENERATION:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_TOOL_PERMISSIONS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_USER_STATUS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_USER_WEBHOOKS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_VALVE_ENCRYPTION:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_VERSION_UPDATE_CHECK:
+    defaults:
+    - '''true'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_VOICE_MODE_PROMPT:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_WEBSOCKET_SUPPORT:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  ENABLE_WEB_LOADER_SSL_VERIFICATION:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_WEB_SEARCH:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENABLE_WEB_SEARCH_CONFIRMATION:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  ENV:
+    defaults:
+    - '''dev'''
+    files:
+    - backend/open_webui/env.py
+  EVALUATION_ARENA_MODELS:
+    defaults:
+    - '''[]'''
+    files:
+    - backend/open_webui/config.py
+  EXA_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  EXA_MAX_CONTENT_LENGTH:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/config.py
+  EXTERNAL_DOCUMENT_LOADER_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  EXTERNAL_DOCUMENT_LOADER_HEADERS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  EXTERNAL_DOCUMENT_LOADER_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  EXTERNAL_PWA_MANIFEST_URL:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/env.py
+  EXTERNAL_WEB_LOADER_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  EXTERNAL_WEB_LOADER_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  EXTERNAL_WEB_SEARCH_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  EXTERNAL_WEB_SEARCH_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  FEISHU_CLIENT_ID:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  FEISHU_CLIENT_SECRET:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  FEISHU_OAUTH_SCOPE:
+    defaults:
+    - '''contact:user.base:readonly'''
+    files:
+    - backend/open_webui/config.py
+  FEISHU_REDIRECT_URI:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  FILE_IMAGE_COMPRESSION_HEIGHT:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/config.py
+  FILE_IMAGE_COMPRESSION_WIDTH:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/config.py
+  FIRECRAWL_API_BASE_URL:
+    defaults:
+    - '''https://api.firecrawl.dev'''
+    files:
+    - backend/open_webui/config.py
+  FIRECRAWL_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  FIRECRAWL_TIMEOUT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  FOLDER_MAX_FILE_COUNT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  FOLLOW_UP_GENERATION_PROMPT_TEMPLATE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  FORWARD_SESSION_INFO_HEADER_CHAT_ID:
+    defaults:
+    - '''X-OpenWebUI-Chat-Id'''
+    files:
+    - backend/open_webui/env.py
+  FORWARD_SESSION_INFO_HEADER_MESSAGE_ID:
+    defaults:
+    - '''X-OpenWebUI-Message-Id'''
+    files:
+    - backend/open_webui/env.py
+  FORWARD_USER_INFO_HEADER_AUTH_TYPE:
+    defaults:
+    - '''X-OpenWebUI-Auth-Type'''
+    files:
+    - backend/open_webui/env.py
+  FORWARD_USER_INFO_HEADER_JWT:
+    defaults:
+    - '''X-OpenWebUI-User-Jwt'''
+    files:
+    - backend/open_webui/env.py
+  FORWARD_USER_INFO_HEADER_JWT_EXPIRES_SECONDS:
+    defaults:
+    - '''300'''
+    files:
+    - backend/open_webui/env.py
+  FORWARD_USER_INFO_HEADER_JWT_SECRET:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/env.py
+  FORWARD_USER_INFO_HEADER_USER_EMAIL:
+    defaults:
+    - '''X-OpenWebUI-User-Email'''
+    files:
+    - backend/open_webui/env.py
+  FORWARD_USER_INFO_HEADER_USER_ID:
+    defaults:
+    - '''X-OpenWebUI-User-Id'''
+    files:
+    - backend/open_webui/env.py
+  FORWARD_USER_INFO_HEADER_USER_NAME:
+    defaults:
+    - '''X-OpenWebUI-User-Name'''
+    files:
+    - backend/open_webui/env.py
+  FORWARD_USER_INFO_HEADER_USER_ROLE:
+    defaults:
+    - '''X-OpenWebUI-User-Role'''
+    files:
+    - backend/open_webui/env.py
+  FROM_INIT_PY:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  FRONTEND_BUILD_DIR:
+    defaults:
+    - BASE_DIR / 'build'
+    - OPEN_WEBUI_DIR / 'frontend'
+    files:
+    - backend/open_webui/env.py
+  GCS_BUCKET_NAME:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  GEMINI_API_BASE_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  GEMINI_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  GITHUB_CLIENT_ID:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  GITHUB_CLIENT_REDIRECT_URI:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  GITHUB_CLIENT_SCOPE:
+    defaults:
+    - '''user:email'''
+    files:
+    - backend/open_webui/config.py
+  GITHUB_CLIENT_SECRET:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  GLOBAL_LOG_LEVEL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  GOOGLE_APPLICATION_CREDENTIALS_JSON:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  GOOGLE_CLIENT_ID:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  GOOGLE_CLIENT_SECRET:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  GOOGLE_DRIVE_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  GOOGLE_DRIVE_CLIENT_ID:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  GOOGLE_OAUTH_AUTHORIZE_PARAMS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  GOOGLE_OAUTH_SCOPE:
+    defaults:
+    - '''openid email profile'''
+    files:
+    - backend/open_webui/config.py
+  GOOGLE_PSE_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  GOOGLE_PSE_ENGINE_ID:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  GOOGLE_REDIRECT_URI:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  IFRAME_CSP:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  IMAGES_EDIT_COMFYUI_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  IMAGES_EDIT_COMFYUI_BASE_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  IMAGES_EDIT_COMFYUI_WORKFLOW:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  IMAGES_EDIT_COMFYUI_WORKFLOW_NODES:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  IMAGES_EDIT_GEMINI_API_BASE_URL:
+    defaults:
+    - GEMINI_API_BASE_URL
+    files:
+    - backend/open_webui/config.py
+  IMAGES_EDIT_GEMINI_API_KEY:
+    defaults:
+    - GEMINI_API_KEY
+    files:
+    - backend/open_webui/config.py
+  IMAGES_EDIT_OPENAI_API_BASE_URL:
+    defaults:
+    - OPENAI_API_BASE_URL
+    files:
+    - backend/open_webui/config.py
+  IMAGES_EDIT_OPENAI_API_KEY:
+    defaults:
+    - OPENAI_API_KEY
+    files:
+    - backend/open_webui/config.py
+  IMAGES_EDIT_OPENAI_API_VERSION:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  IMAGES_GEMINI_API_BASE_URL:
+    defaults:
+    - GEMINI_API_BASE_URL
+    files:
+    - backend/open_webui/config.py
+  IMAGES_GEMINI_API_KEY:
+    defaults:
+    - GEMINI_API_KEY
+    files:
+    - backend/open_webui/config.py
+  IMAGES_GEMINI_ENDPOINT_METHOD:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  IMAGES_OPENAI_API_BASE_URL:
+    defaults:
+    - OPENAI_API_BASE_URL
+    files:
+    - backend/open_webui/config.py
+  IMAGES_OPENAI_API_KEY:
+    defaults:
+    - OPENAI_API_KEY
+    files:
+    - backend/open_webui/config.py
+  IMAGES_OPENAI_API_VERSION:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  IMAGES_OPENAI_PARAMS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  IMAGE_AUTO_SIZE_MODELS_REGEX_PATTERN:
+    defaults:
+    - '''^gpt-image'''
+    files:
+    - backend/open_webui/config.py
+  IMAGE_EDIT_ENGINE:
+    defaults:
+    - '''openai'''
+    files:
+    - backend/open_webui/config.py
+  IMAGE_EDIT_MODEL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  IMAGE_EDIT_SIZE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  IMAGE_GENERATION_ENGINE:
+    defaults:
+    - '''openai'''
+    files:
+    - backend/open_webui/config.py
+  IMAGE_GENERATION_MODEL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  IMAGE_PROMPT_GENERATION_PROMPT_TEMPLATE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  IMAGE_SIZE:
+    defaults:
+    - '''512x512'''
+    files:
+    - backend/open_webui/config.py
+  IMAGE_STEPS:
+    defaults:
+    - '50'
+    files:
+    - backend/open_webui/config.py
+  IMAGE_URL_RESPONSE_MODELS_REGEX_PATTERN:
+    defaults:
+    - '''^gpt-image'''
+    files:
+    - backend/open_webui/config.py
+  INSTANCE_ID:
+    defaults:
+    - str(uuid4())
+    files:
+    - backend/open_webui/env.py
+  JINA_API_BASE_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  JINA_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  JWT_EXPIRES_IN:
+    defaults:
+    - '''4w'''
+    files:
+    - backend/open_webui/config.py
+  K8S_FLAG:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  KAGI_SEARCH_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  LDAP_APP_DN:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  LDAP_APP_PASSWORD:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  LDAP_ATTRIBUTE_FOR_GROUPS:
+    defaults:
+    - '''memberOf'''
+    files:
+    - backend/open_webui/config.py
+  LDAP_ATTRIBUTE_FOR_MAIL:
+    defaults:
+    - '''mail'''
+    files:
+    - backend/open_webui/config.py
+  LDAP_ATTRIBUTE_FOR_USERNAME:
+    defaults:
+    - '''uid'''
+    files:
+    - backend/open_webui/config.py
+  LDAP_CA_CERT_FILE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  LDAP_CIPHERS:
+    defaults:
+    - '''ALL'''
+    files:
+    - backend/open_webui/config.py
+  LDAP_SEARCH_BASE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  LDAP_SEARCH_FILTER:
+    defaults:
+    - os.getenv('LDAP_SEARCH_FILTERS', '')
+    files:
+    - backend/open_webui/config.py
+  LDAP_SEARCH_FILTERS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  LDAP_SERVER_HOST:
+    defaults:
+    - '''localhost'''
+    files:
+    - backend/open_webui/config.py
+  LDAP_SERVER_LABEL:
+    defaults:
+    - '''LDAP Server'''
+    files:
+    - backend/open_webui/config.py
+  LDAP_SERVER_PORT:
+    defaults:
+    - '''389'''
+    files:
+    - backend/open_webui/config.py
+  LDAP_USE_TLS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  LDAP_VALIDATE_CERT:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  LICENSE_BLOB_PATH:
+    defaults:
+    - DATA_DIR / 'l.data'
+    files:
+    - backend/open_webui/env.py
+  LICENSE_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  LICENSE_PUBLIC_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  LINKUP_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  LINKUP_SEARCH_PARAMS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  LOGURU_DIAGNOSE:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  LOG_FORMAT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  MARIADB_VECTOR_DB_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  MARIADB_VECTOR_DISTANCE_STRATEGY:
+    defaults:
+    - '''cosine'''
+    files:
+    - backend/open_webui/config.py
+  MARIADB_VECTOR_INDEX_M:
+    defaults:
+    - '''8'''
+    files:
+    - backend/open_webui/config.py
+  MARIADB_VECTOR_INITIALIZE_MAX_VECTOR_LENGTH:
+    defaults:
+    - '''1536'''
+    files:
+    - backend/open_webui/config.py
+  MARIADB_VECTOR_POOL_MAX_OVERFLOW:
+    defaults:
+    - '0'
+    files:
+    - backend/open_webui/config.py
+  MARIADB_VECTOR_POOL_RECYCLE:
+    defaults:
+    - '3600'
+    files:
+    - backend/open_webui/config.py
+  MARIADB_VECTOR_POOL_SIZE:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  MARIADB_VECTOR_POOL_TIMEOUT:
+    defaults:
+    - '30'
+    files:
+    - backend/open_webui/config.py
+  MAX_BODY_LOG_SIZE:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/env.py
+  MCP_INITIALIZE_TIMEOUT:
+    defaults:
+    - '''10'''
+    files:
+    - backend/open_webui/env.py
+  MEMORIES_CONTEXT_CHAR_LIMIT:
+    defaults:
+    - '''2000'''
+    files:
+    - backend/open_webui/config.py
+  MEMORIES_REVIEW_INTERVAL_TURNS:
+    defaults:
+    - '''10'''
+    files:
+    - backend/open_webui/config.py
+  MEMORIES_USER_CHAR_LIMIT:
+    defaults:
+    - '''2000'''
+    files:
+    - backend/open_webui/config.py
+  MICROSOFT_CLIENT_ID:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  MICROSOFT_CLIENT_LOGIN_BASE_URL:
+    defaults:
+    - '''https://login.microsoftonline.com'''
+    files:
+    - backend/open_webui/config.py
+  MICROSOFT_CLIENT_PICTURE_URL:
+    defaults:
+    - '''https://graph.microsoft.com/v1.0/me/photo/$value'','
+    files:
+    - backend/open_webui/config.py
+  MICROSOFT_CLIENT_SECRET:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  MICROSOFT_CLIENT_TENANT_ID:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  MICROSOFT_OAUTH_SCOPE:
+    defaults:
+    - '''openid email profile'''
+    files:
+    - backend/open_webui/config.py
+  MICROSOFT_REDIRECT_URI:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  MICROSOFT_WEB_IQ_API_BASE_URL:
+    defaults:
+    - '''https://api.microsoft.ai/v3'''
+    files:
+    - backend/open_webui/config.py
+  MICROSOFT_WEB_IQ_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  MICROSOFT_WEB_IQ_LANGUAGE:
+    defaults:
+    - '''en'''
+    files:
+    - backend/open_webui/config.py
+  MILVUS_COLLECTION_PREFIX:
+    defaults:
+    - '''open_webui'''
+    files:
+    - backend/open_webui/config.py
+  MILVUS_DB:
+    defaults:
+    - '''default'''
+    files:
+    - backend/open_webui/config.py
+  MILVUS_DISKANN_MAX_DEGREE:
+    defaults:
+    - '''56'''
+    files:
+    - backend/open_webui/config.py
+  MILVUS_DISKANN_SEARCH_LIST_SIZE:
+    defaults:
+    - '''100'''
+    files:
+    - backend/open_webui/config.py
+  MILVUS_HNSW_EFCONSTRUCTION:
+    defaults:
+    - '''100'''
+    files:
+    - backend/open_webui/config.py
+  MILVUS_HNSW_M:
+    defaults:
+    - '''16'''
+    files:
+    - backend/open_webui/config.py
+  MILVUS_INDEX_TYPE:
+    defaults:
+    - '''HNSW'''
+    files:
+    - backend/open_webui/config.py
+  MILVUS_IVF_FLAT_NLIST:
+    defaults:
+    - '''128'''
+    files:
+    - backend/open_webui/config.py
+  MILVUS_METRIC_TYPE:
+    defaults:
+    - '''COSINE'''
+    files:
+    - backend/open_webui/config.py
+  MILVUS_TOKEN:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  MILVUS_URI:
+    defaults:
+    - f'{DATA_DIR}/vector_db/milvus.db'
+    files:
+    - backend/open_webui/config.py
+  MINERU_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  MINERU_API_MODE:
+    defaults:
+    - '''local'''
+    files:
+    - backend/open_webui/config.py
+  MINERU_API_TIMEOUT:
+    defaults:
+    - '''300'''
+    files:
+    - backend/open_webui/config.py
+  MINERU_API_URL:
+    defaults:
+    - '''http://localhost:8000'''
+    files:
+    - backend/open_webui/config.py
+  MINERU_FILE_EXTENSIONS:
+    defaults:
+    - '''pdf'''
+    files:
+    - backend/open_webui/config.py
+  MINERU_MAX_MARKDOWN_BYTES:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/env.py
+  MINERU_PARAMS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  MISTRAL_OCR_API_BASE_URL:
+    defaults:
+    - '''https://api.mistral.ai/v1'''
+    files:
+    - backend/open_webui/config.py
+  MISTRAL_OCR_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  MISTRAL_OCR_USE_BASE64:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  MODELS_CACHE_TTL:
+    defaults:
+    - '''1'''
+    files:
+    - backend/open_webui/env.py
+  MODEL_ORDER_LIST:
+    defaults:
+    - '''[]'''
+    files:
+    - backend/open_webui/config.py
+  MOJEEK_SEARCH_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_ACCESS_TOKEN_REQUEST_INCLUDE_CLIENT_ID:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_ADMIN_ROLES:
+    defaults:
+    - '''admin'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_ALLOWED_DOMAINS:
+    defaults:
+    - '''*'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_ALLOWED_ROLES:
+    defaults:
+    - f'user{OAUTH_ROLES_SEPARATOR}admin'
+    files:
+    - backend/open_webui/config.py
+  OAUTH_AUDIENCE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_AUTHORIZE_PARAMS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_AUTO_REDIRECT:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_BLOCKED_GROUPS:
+    defaults:
+    - '''[]'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_CLIENT_ID:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_CLIENT_INFO_ENCRYPTION_KEY:
+    defaults:
+    - WEBUI_SECRET_KEY
+    files:
+    - backend/open_webui/env.py
+  OAUTH_CLIENT_SECRET:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_CLIENT_TIMEOUT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_CODE_CHALLENGE_METHOD:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  OAUTH_EMAIL_CLAIM:
+    defaults:
+    - '''email'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_GROUPS_CLAIM:
+    defaults:
+    - os.getenv('OAUTH_GROUP_CLAIM', 'groups')
+    files:
+    - backend/open_webui/config.py
+  OAUTH_GROUPS_SEPARATOR:
+    defaults:
+    - ''';'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_GROUP_CLAIM:
+    defaults:
+    - '''groups'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_GROUP_DEFAULT_SHARE:
+    defaults:
+    - '''true'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_MAX_SESSIONS_PER_USER:
+    defaults:
+    - '''10'''
+    files:
+    - backend/open_webui/env.py
+  OAUTH_MERGE_ACCOUNTS_BY_EMAIL:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_PICTURE_CLAIM:
+    defaults:
+    - '''picture'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_PROVIDER_NAME:
+    defaults:
+    - '''SSO'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_REFRESH_TOKEN_INCLUDE_SCOPE:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_ROLES_CLAIM:
+    defaults:
+    - '''roles'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_ROLES_SEPARATOR:
+    defaults:
+    - ''','''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_SCOPES:
+    defaults:
+    - '''openid email profile'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_SESSION_TOKEN_ENCRYPTION_KEY:
+    defaults:
+    - WEBUI_SECRET_KEY
+    files:
+    - backend/open_webui/env.py
+  OAUTH_SUB_CLAIM:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  OAUTH_TIMEOUT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_TOKEN_ENDPOINT_AUTH_METHOD:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  OAUTH_TOKEN_EXCHANGE_RATE_LIMIT:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/env.py
+  OAUTH_TOKEN_EXCHANGE_RATE_LIMIT_WINDOW:
+    defaults:
+    - str(60 * 3)
+    files:
+    - backend/open_webui/env.py
+  OAUTH_TOKEN_EXCHANGE_TRUSTED_CLIENT_IDS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  OAUTH_UPDATE_EMAIL_ON_LOGIN:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_UPDATE_NAME_ON_LOGIN:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_UPDATE_PICTURE_ON_LOGIN:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  OAUTH_USERNAME_CLAIM:
+    defaults:
+    - '''name'''
+    files:
+    - backend/open_webui/config.py
+  OFFLINE_MODE:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/env.py
+  OLLAMA_API_BASE_URL:
+    defaults:
+    - '''http://localhost:11434/api'''
+    files:
+    - backend/open_webui/config.py
+  OLLAMA_API_CONFIGS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OLLAMA_BASE_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OLLAMA_BASE_URLS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OLLAMA_CLOUD_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  ONEDRIVE_CLIENT_ID:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  ONEDRIVE_CLIENT_ID_BUSINESS:
+    defaults:
+    - ONEDRIVE_CLIENT_ID
+    files:
+    - backend/open_webui/config.py
+  ONEDRIVE_CLIENT_ID_PERSONAL:
+    defaults:
+    - ONEDRIVE_CLIENT_ID
+    files:
+    - backend/open_webui/config.py
+  ONEDRIVE_SHAREPOINT_TENANT_ID:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  ONEDRIVE_SHAREPOINT_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OPENAI_API_BASE_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OPENAI_API_BASE_URLS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OPENAI_API_CONFIGS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OPENAI_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OPENAI_API_KEYS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OPENGAUSS_DB_URL:
+    defaults:
+    - DATABASE_URL
+    files:
+    - backend/open_webui/config.py
+  OPENGAUSS_INITIALIZE_MAX_VECTOR_LENGTH:
+    defaults:
+    - '''1536'''
+    files:
+    - backend/open_webui/config.py
+  OPENGAUSS_POOL_MAX_OVERFLOW:
+    defaults:
+    - '0'
+    files:
+    - backend/open_webui/config.py
+  OPENGAUSS_POOL_RECYCLE:
+    defaults:
+    - '3600'
+    files:
+    - backend/open_webui/config.py
+  OPENGAUSS_POOL_SIZE:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  OPENGAUSS_POOL_TIMEOUT:
+    defaults:
+    - '30'
+    files:
+    - backend/open_webui/config.py
+  OPENID_END_SESSION_ENDPOINT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OPENID_PROVIDER_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OPENID_REDIRECT_URI:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  OPENSEARCH_CERT_VERIFY:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  OPENSEARCH_PASSWORD:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  OPENSEARCH_SSL:
+    defaults:
+    - '''true'''
+    files:
+    - backend/open_webui/config.py
+  OPENSEARCH_URI:
+    defaults:
+    - '''https://localhost:9200'''
+    files:
+    - backend/open_webui/config.py
+  OPENSEARCH_USERNAME:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  OPENSERP_BASE_URL:
+    defaults:
+    - '''http://localhost:7000'''
+    files:
+    - backend/open_webui/config.py
+  ORACLE_DB_DSN:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  ORACLE_DB_PASSWORD:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  ORACLE_DB_POOL_INCREMENT:
+    defaults:
+    - '1'
+    files:
+    - backend/open_webui/config.py
+  ORACLE_DB_POOL_MAX:
+    defaults:
+    - '10'
+    files:
+    - backend/open_webui/config.py
+  ORACLE_DB_POOL_MIN:
+    defaults:
+    - '2'
+    files:
+    - backend/open_webui/config.py
+  ORACLE_DB_USER:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  ORACLE_DB_USE_WALLET:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  ORACLE_VECTOR_LENGTH:
+    defaults:
+    - '768'
+    files:
+    - backend/open_webui/config.py
+  ORACLE_WALLET_DIR:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  ORACLE_WALLET_PASSWORD:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  OTEL_BASIC_AUTH_PASSWORD:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  OTEL_BASIC_AUTH_USERNAME:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  OTEL_EXPORTER_OTLP_ENDPOINT:
+    defaults:
+    - '''http://localhost:4317'''
+    files:
+    - backend/open_webui/env.py
+  OTEL_EXPORTER_OTLP_INSECURE:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  OTEL_LOGS_BASIC_AUTH_PASSWORD:
+    defaults:
+    - OTEL_BASIC_AUTH_PASSWORD
+    files:
+    - backend/open_webui/env.py
+  OTEL_LOGS_BASIC_AUTH_USERNAME:
+    defaults:
+    - OTEL_BASIC_AUTH_USERNAME
+    files:
+    - backend/open_webui/env.py
+  OTEL_LOGS_EXPORTER_OTLP_ENDPOINT:
+    defaults:
+    - OTEL_EXPORTER_OTLP_ENDPOINT
+    files:
+    - backend/open_webui/env.py
+  OTEL_LOGS_EXPORTER_OTLP_INSECURE:
+    defaults:
+    - str(OTEL_EXPORTER_OTLP_INSECURE)
+    files:
+    - backend/open_webui/env.py
+  OTEL_LOGS_OTLP_SPAN_EXPORTER:
+    defaults:
+    - OTEL_OTLP_SPAN_EXPORTER
+    files:
+    - backend/open_webui/env.py
+  OTEL_METRICS_BASIC_AUTH_PASSWORD:
+    defaults:
+    - OTEL_BASIC_AUTH_PASSWORD
+    files:
+    - backend/open_webui/env.py
+  OTEL_METRICS_BASIC_AUTH_USERNAME:
+    defaults:
+    - OTEL_BASIC_AUTH_USERNAME
+    files:
+    - backend/open_webui/env.py
+  OTEL_METRICS_EXPORTER_OTLP_ENDPOINT:
+    defaults:
+    - OTEL_EXPORTER_OTLP_ENDPOINT
+    files:
+    - backend/open_webui/env.py
+  OTEL_METRICS_EXPORTER_OTLP_INSECURE:
+    defaults:
+    - str(OTEL_EXPORTER_OTLP_INSECURE)
+    files:
+    - backend/open_webui/env.py
+  OTEL_METRICS_EXPORT_INTERVAL_MILLIS:
+    defaults:
+    - '''10000'''
+    files:
+    - backend/open_webui/env.py
+  OTEL_METRICS_OTLP_SPAN_EXPORTER:
+    defaults:
+    - OTEL_OTLP_SPAN_EXPORTER
+    files:
+    - backend/open_webui/env.py
+  OTEL_OTLP_SPAN_EXPORTER:
+    defaults:
+    - '''grpc'''
+    files:
+    - backend/open_webui/env.py
+  OTEL_RESOURCE_ATTRIBUTES:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  OTEL_SERVICE_NAME:
+    defaults:
+    - '''open-webui'''
+    files:
+    - backend/open_webui/env.py
+  OTEL_TRACES_SAMPLER:
+    defaults:
+    - '''parentbased_always_on'''
+    files:
+    - backend/open_webui/env.py
+  PADDLEOCR_VL_BASE_URL:
+    defaults:
+    - '''http://localhost:8080'''
+    files:
+    - backend/open_webui/config.py
+  PADDLEOCR_VL_TOKEN:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  PASSWORD_HASH_ALGORITHM:
+    defaults:
+    - '''bcrypt'''
+    files:
+    - backend/open_webui/env.py
+  PASSWORD_VALIDATION_HINT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  PASSWORD_VALIDATION_REGEX_PATTERN:
+    defaults:
+    - r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,}$',
+    files:
+    - backend/open_webui/env.py
+  PDF_EXTRACT_IMAGES:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  PDF_LOADER_MODE:
+    defaults:
+    - '''page'''
+    files:
+    - backend/open_webui/config.py
+  PENDING_USER_OVERLAY_CONTENT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  PENDING_USER_OVERLAY_TITLE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  PERPLEXITY_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  PERPLEXITY_MODEL:
+    defaults:
+    - '''sonar'''
+    files:
+    - backend/open_webui/config.py
+  PERPLEXITY_SEARCH_API_URL:
+    defaults:
+    - '''https://api.perplexity.ai/search'''
+    files:
+    - backend/open_webui/config.py
+  PERPLEXITY_SEARCH_CONTEXT_USAGE:
+    defaults:
+    - '''medium'''
+    files:
+    - backend/open_webui/config.py
+  PGVECTOR_CREATE_EXTENSION:
+    defaults:
+    - '''true'''
+    files:
+    - backend/open_webui/config.py
+  PGVECTOR_DB_URL:
+    defaults:
+    - DATABASE_URL
+    files:
+    - backend/open_webui/config.py
+  PGVECTOR_HNSW_EF_CONSTRUCTION:
+    defaults:
+    - '64'
+    files:
+    - backend/open_webui/config.py
+  PGVECTOR_HNSW_M:
+    defaults:
+    - '16'
+    files:
+    - backend/open_webui/config.py
+  PGVECTOR_INDEX_METHOD:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  PGVECTOR_INITIALIZE_MAX_VECTOR_LENGTH:
+    defaults:
+    - '''1536'''
+    files:
+    - backend/open_webui/config.py
+  PGVECTOR_ITERATIVE_SCAN:
+    defaults:
+    - '''relaxed_order'''
+    files:
+    - backend/open_webui/config.py
+  PGVECTOR_IVFFLAT_LISTS:
+    defaults:
+    - '100'
+    files:
+    - backend/open_webui/config.py
+  PGVECTOR_PGCRYPTO:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  PGVECTOR_PGCRYPTO_KEY:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  PGVECTOR_POOL_MAX_OVERFLOW:
+    defaults:
+    - '0'
+    files:
+    - backend/open_webui/config.py
+  PGVECTOR_POOL_RECYCLE:
+    defaults:
+    - '3600'
+    files:
+    - backend/open_webui/config.py
+  PGVECTOR_POOL_SIZE:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  PGVECTOR_POOL_TIMEOUT:
+    defaults:
+    - '30'
+    files:
+    - backend/open_webui/config.py
+  PGVECTOR_USE_HALFVEC:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  PINECONE_API_KEY:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  PINECONE_CLOUD:
+    defaults:
+    - '''aws'''
+    files:
+    - backend/open_webui/config.py
+  PINECONE_DIMENSION:
+    defaults:
+    - '1536'
+    files:
+    - backend/open_webui/config.py
+  PINECONE_ENVIRONMENT:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  PINECONE_INDEX_NAME:
+    defaults:
+    - '''open-webui-index'''
+    files:
+    - backend/open_webui/config.py
+  PINECONE_METRIC:
+    defaults:
+    - '''cosine'''
+    files:
+    - backend/open_webui/config.py
+  PIP_OPTIONS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  PIP_PACKAGE_INDEX_OPTIONS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  PLAYWRIGHT_TIMEOUT:
+    defaults:
+    - '''10000'''
+    files:
+    - backend/open_webui/config.py
+  PLAYWRIGHT_WS_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  PROFILE_IMAGE_ALLOWED_MIME_TYPES:
+    defaults:
+    - '''image/png,image/jpeg,image/gif,image/webp'','
+    files:
+    - backend/open_webui/env.py
+  PROFILE_IMAGE_MAX_DATA_URI_SIZE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  QDRANT_API_KEY:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  QDRANT_COLLECTION_PREFIX:
+    defaults:
+    - '''open-webui'''
+    files:
+    - backend/open_webui/config.py
+  QDRANT_GRPC_PORT:
+    defaults:
+    - '''6334'''
+    files:
+    - backend/open_webui/config.py
+  QDRANT_HNSW_M:
+    defaults:
+    - '''16'''
+    files:
+    - backend/open_webui/config.py
+  QDRANT_ON_DISK:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  QDRANT_PREFER_GRPC:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  QDRANT_TIMEOUT:
+    defaults:
+    - '''5'''
+    files:
+    - backend/open_webui/config.py
+  QDRANT_URI:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  QUERY_GENERATION_PROMPT_TEMPLATE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  RAG_ALLOWED_FILE_EXTENSIONS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  RAG_AZURE_OPENAI_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  RAG_AZURE_OPENAI_API_VERSION:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  RAG_AZURE_OPENAI_BASE_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  RAG_EMBEDDING_BATCH_SIZE:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/config.py
+  RAG_EMBEDDING_CONCURRENT_REQUESTS:
+    defaults:
+    - '''0'''
+    files:
+    - backend/open_webui/config.py
+  RAG_EMBEDDING_CONTENT_PREFIX:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  RAG_EMBEDDING_ENGINE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  RAG_EMBEDDING_MODEL:
+    defaults:
+    - '''sentence-transformers/all-MiniLM-L6-v2'''
+    files:
+    - backend/open_webui/config.py
+  RAG_EMBEDDING_MODEL_AUTO_UPDATE:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  RAG_EMBEDDING_MODEL_TRUST_REMOTE_CODE:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  RAG_EMBEDDING_OPENAI_BATCH_SIZE:
+    defaults:
+    - '''1'''
+    files:
+    - backend/open_webui/config.py
+  RAG_EMBEDDING_PREFIX_FIELD_NAME:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  RAG_EMBEDDING_QUERY_PREFIX:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  RAG_EMBEDDING_TIMEOUT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  RAG_EXTERNAL_RERANKER_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  RAG_EXTERNAL_RERANKER_TIMEOUT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  RAG_EXTERNAL_RERANKER_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  RAG_FILE_CONTENT_SEARCH_MAX_CHARS:
+    defaults:
+    - str(64 * 1024 * 1024)
+    files:
+    - backend/open_webui/config.py
+  RAG_FILE_MAX_COUNT:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/config.py
+  RAG_FILE_MAX_SIZE:
+    defaults:
+    - '''0'''
+    - <unset>
+    files:
+    - backend/open_webui/config.py
+    - backend/open_webui/env.py
+  RAG_FULL_CONTEXT:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  RAG_HYBRID_BM25_WEIGHT:
+    defaults:
+    - '''0.5'''
+    files:
+    - backend/open_webui/config.py
+  RAG_METADATA_MAX_VALUE_CHARS:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/env.py
+  RAG_OLLAMA_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  RAG_OLLAMA_BASE_URL:
+    defaults:
+    - OLLAMA_BASE_URL
+    files:
+    - backend/open_webui/config.py
+  RAG_OPENAI_API_BASE_URL:
+    defaults:
+    - OPENAI_API_BASE_URL
+    files:
+    - backend/open_webui/config.py
+  RAG_OPENAI_API_KEY:
+    defaults:
+    - OPENAI_API_KEY
+    files:
+    - backend/open_webui/config.py
+  RAG_RELEVANCE_THRESHOLD:
+    defaults:
+    - '''0.0'''
+    files:
+    - backend/open_webui/config.py
+  RAG_RERANKING_BATCH_SIZE:
+    defaults:
+    - '''32'''
+    files:
+    - backend/open_webui/config.py
+  RAG_RERANKING_ENGINE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  RAG_RERANKING_MODEL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  RAG_RERANKING_MODEL_AUTO_UPDATE:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  RAG_RERANKING_MODEL_TRUST_REMOTE_CODE:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  RAG_SOURCE_METADATA_KEYS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  RAG_SYSTEM_CONTEXT:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  RAG_TEMPLATE:
+    defaults:
+    - DEFAULT_RAG_TEMPLATE
+    files:
+    - backend/open_webui/config.py
+  RAG_TEXT_SPLITTER:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  RAG_TOKENIZER_MODEL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  RAG_TOP_K:
+    defaults:
+    - '''3'''
+    files:
+    - backend/open_webui/config.py
+  RAG_TOP_K_RERANKER:
+    defaults:
+    - '''3'''
+    files:
+    - backend/open_webui/config.py
+  REDIS_CLUSTER:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  REDIS_HEALTH_CHECK_INTERVAL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  REDIS_KEY_PREFIX:
+    defaults:
+    - '''open-webui'''
+    files:
+    - backend/open_webui/env.py
+  REDIS_RECONNECT_DELAY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  REDIS_RESPONSE_STREAM_TTL:
+    defaults:
+    - '''3600'''
+    files:
+    - backend/open_webui/env.py
+  REDIS_SENTINEL_HOSTS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  REDIS_SENTINEL_MAX_RETRY_COUNT:
+    defaults:
+    - '''2'''
+    files:
+    - backend/open_webui/env.py
+  REDIS_SENTINEL_PORT:
+    defaults:
+    - '''26379'''
+    files:
+    - backend/open_webui/env.py
+  REDIS_SOCKET_CONNECT_TIMEOUT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  REDIS_SOCKET_KEEPALIVE:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  REDIS_SOCKET_TIMEOUT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  REDIS_TASK_TTL:
+    defaults:
+    - '''300'''
+    files:
+    - backend/open_webui/env.py
+  REDIS_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  REQUESTS_VERIFY:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  RESET_CONFIG_ON_START:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  RESPONSE_WATERMARK:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  S3_ACCESS_KEY_ID:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  S3_ADDRESSING_STYLE:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  S3_BUCKET_NAME:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  S3_ENABLE_TAGGING:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  S3_ENDPOINT_URL:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  S3_KEY_PREFIX:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  S3_REGION_NAME:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  S3_SECRET_ACCESS_KEY:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  S3_USE_ACCELERATE_ENDPOINT:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  S3_VECTOR_BUCKET_NAME:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  S3_VECTOR_REGION:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  SAFE_MODE:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  SCIM_AUTH_PROVIDER:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  SCIM_ENABLED:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  SCIM_TOKEN:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  SEARCHAPI_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  SEARCHAPI_ENGINE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  SEARXNG_CLIENT_CERT_FILE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  SEARXNG_CLIENT_KEY_FILE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  SEARXNG_LANGUAGE:
+    defaults:
+    - '''all'''
+    files:
+    - backend/open_webui/config.py
+  SEARXNG_QUERY_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  SENTENCE_TRANSFORMERS_BACKEND:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  SENTENCE_TRANSFORMERS_CROSS_ENCODER_BACKEND:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  SENTENCE_TRANSFORMERS_CROSS_ENCODER_MODEL_KWARGS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  SENTENCE_TRANSFORMERS_CROSS_ENCODER_SIGMOID_ACTIVATION_FUNCTION:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  SENTENCE_TRANSFORMERS_MODEL_KWARGS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  SERPAPI_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  SERPAPI_ENGINE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  SERPER_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  SERPHOUSE_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  SERPHOUSE_DOMAIN:
+    defaults:
+    - '''google.com'''
+    files:
+    - backend/open_webui/config.py
+  SERPLY_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  SERPSTACK_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  SERPSTACK_HTTPS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  SHOW_ADMIN_DETAILS:
+    defaults:
+    - '''true'''
+    files:
+    - backend/open_webui/config.py
+  SOUGOU_API_SID:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  SOUGOU_API_SK:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  SSL_ASSERT_FINGERPRINT:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  STAAN_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  STAAN_MARKET:
+    defaults:
+    - '''en-us'''
+    files:
+    - backend/open_webui/config.py
+  STAAN_MAX_SNIPPETS:
+    defaults:
+    - '''0'''
+    files:
+    - backend/open_webui/config.py
+  STATIC_DIR:
+    defaults:
+    - OPEN_WEBUI_DIR / 'static'
+    files:
+    - backend/open_webui/config.py
+    - backend/open_webui/env.py
+  STORAGE_LOCAL_CACHE:
+    defaults:
+    - '''true'''
+    files:
+    - backend/open_webui/config.py
+  STORAGE_PROVIDER:
+    defaults:
+    - '''local'''
+    files:
+    - backend/open_webui/config.py
+  SUBAGENTS_BACKGROUND_ENABLED:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  SUBAGENTS_MAX_ASYNC:
+    defaults:
+    - '''20'''
+    files:
+    - backend/open_webui/config.py
+  SUBAGENTS_MAX_CONCURRENT:
+    defaults:
+    - '''20'''
+    files:
+    - backend/open_webui/config.py
+  SUBAGENTS_MAX_ITERATIONS:
+    defaults:
+    - '''30'''
+    files:
+    - backend/open_webui/config.py
+  SUBAGENTS_MAX_OUTPUT:
+    defaults:
+    - '''30000'''
+    files:
+    - backend/open_webui/config.py
+  SUBAGENTS_SYSTEM_PROMPT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  TAGS_GENERATION_PROMPT_TEMPLATE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  TASK_MODEL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  TASK_MODEL_EXTERNAL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  TASK_MODEL_PARAMS:
+    defaults:
+    - '''{}'''
+    files:
+    - backend/open_webui/config.py
+  TAVILY_API_BASE_URL:
+    defaults:
+    - '''https://api.tavily.com'''
+    files:
+    - backend/open_webui/env.py
+  TAVILY_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  TAVILY_EXTRACT_DEPTH:
+    defaults:
+    - '''basic'''
+    files:
+    - backend/open_webui/config.py
+  TERMINAL_PROXY_HEADERS:
+    defaults:
+    - '''{}'''
+    files:
+    - backend/open_webui/config.py
+  TERMINAL_SERVER_CONNECTIONS:
+    defaults:
+    - '''[]'''
+    files:
+    - backend/open_webui/config.py
+  THREAD_POOL_SIZE:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/config.py
+  THREAD_POOL_THREAD_NAME_PREFIX:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  TIKA_SERVER_URL:
+    defaults:
+    - '''http://tika:9998'''
+    files:
+    - backend/open_webui/config.py
+  TIKA_SERVER_VERSION:
+    defaults:
+    - '''3'''
+    files:
+    - backend/open_webui/config.py
+  TIKTOKEN_CACHE_DIR:
+    defaults:
+    - f'{CACHE_DIR}/tiktoken'
+    files:
+    - backend/open_webui/config.py
+  TIKTOKEN_ENCODING_NAME:
+    defaults:
+    - '''cl100k_base'''
+    files:
+    - backend/open_webui/config.py
+  TITLE_GENERATION_PROMPT_TEMPLATE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  TOOLS_FUNCTION_CALLING_PROMPT_TEMPLATE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  TOOL_SERVER_CONNECTIONS:
+    defaults:
+    - '''[]'''
+    files:
+    - backend/open_webui/config.py
+  TRUSTED_SIGNATURE_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  USER_AGENT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  USER_PERMISSIONS_ACCESS_GRANTS_ALLOW_GROUPS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_ACCESS_GRANTS_ALLOW_USERS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CALENDAR_ALLOW_PUBLIC_SHARING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_ALLOW_OPEN_SHARING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_ALLOW_PUBLIC_SHARING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_CALL:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_CONTINUE_RESPONSE:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_CONTROLS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_DELETE:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_DELETE_MESSAGE:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_EDIT:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_EXPORT:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_FILE_UPLOAD:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_IMPORT:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_MULTIPLE_MODELS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_PARAMS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_RATE_RESPONSE:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_REGENERATE_RESPONSE:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_SHARE:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_STT:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_SYSTEM_PROMPT:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_TEMPORARY:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_TEMPORARY_ENFORCED:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_TTS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_VALVES:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_CHAT_WEB_UPLOAD:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_FEATURES_API_KEYS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_FEATURES_AUTOMATIONS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_FEATURES_CALENDAR:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_FEATURES_CHANNELS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_FEATURES_CODE_INTERPRETER:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_FEATURES_DIRECT_TOOL_SERVERS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_FEATURES_FOLDERS:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_FEATURES_IMAGE_GENERATION:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_FEATURES_MEMORIES:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_FEATURES_NOTES:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_FEATURES_USER_WEBHOOKS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_FEATURES_WEB_SEARCH:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_FOLDERS_ALLOW_SHARING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_NOTES_ALLOW_PUBLIC_SHARING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_NOTES_ALLOW_SHARING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_SETTINGS_INTERFACE:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_KNOWLEDGE_ACCESS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_KNOWLEDGE_ALLOW_PUBLIC_SHARING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_KNOWLEDGE_ALLOW_SHARING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_MODELS_ACCESS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_MODELS_ALLOW_PUBLIC_SHARING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_MODELS_ALLOW_SHARING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_MODELS_EXPORT:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_MODELS_IMPORT:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_PROMPTS_ACCESS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_PROMPTS_ALLOW_PUBLIC_SHARING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_PROMPTS_ALLOW_SHARING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_PROMPTS_EXPORT:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_PROMPTS_IMPORT:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_SKILLS_ACCESS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_SKILLS_ALLOW_PUBLIC_SHARING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_SKILLS_ALLOW_SHARING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_SKILLS_EXPORT:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_SKILLS_IMPORT:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_TOOLS_ACCESS:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_TOOLS_ALLOW_PUBLIC_SHARING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_TOOLS_ALLOW_SHARING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_TOOLS_EXPORT:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USER_PERMISSIONS_WORKSPACE_TOOLS_IMPORT:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  USE_CUDA_DOCKER:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/env.py
+  USE_OLLAMA_DOCKER:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  USE_SLIM_DOCKER:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  UVICORN_WORKERS:
+    defaults:
+    - '''1'''
+    files:
+    - backend/open_webui/env.py
+  UVICORN_WS_PER_MESSAGE_DEFLATE:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  VALKEY_COLLECTION_PREFIX:
+    defaults:
+    - '''open_webui'''
+    files:
+    - backend/open_webui/config.py
+  VALKEY_DISTANCE_METRIC:
+    defaults:
+    - '''COSINE'''
+    files:
+    - backend/open_webui/config.py
+  VALKEY_HNSW_EF_CONSTRUCTION:
+    defaults:
+    - '''200'''
+    files:
+    - backend/open_webui/config.py
+  VALKEY_HNSW_EF_RUNTIME:
+    defaults:
+    - '''10'''
+    files:
+    - backend/open_webui/config.py
+  VALKEY_HNSW_M:
+    defaults:
+    - '''16'''
+    files:
+    - backend/open_webui/config.py
+  VALKEY_INDEX_TYPE:
+    defaults:
+    - '''HNSW'''
+    files:
+    - backend/open_webui/config.py
+  VALKEY_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  VECTOR_DB:
+    defaults:
+    - '''pgvector'' if USE_SLIM else ''chroma'''
+    files:
+    - backend/open_webui/config.py
+  VOICE_MODE_PROMPT_TEMPLATE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  WEAVIATE_API_KEY:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/config.py
+  WEAVIATE_GRPC_HOST:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  WEAVIATE_GRPC_PORT:
+    defaults:
+    - '''50051'''
+    files:
+    - backend/open_webui/config.py
+  WEAVIATE_GRPC_SECURE:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  WEAVIATE_HTTP_HOST:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  WEAVIATE_HTTP_PORT:
+    defaults:
+    - '''8080'''
+    files:
+    - backend/open_webui/config.py
+  WEAVIATE_HTTP_SECURE:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  WEAVIATE_SKIP_INIT_CHECKS:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/config.py
+  WEBHOOK_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  WEBSOCKET_EVENT_CALLER_TIMEOUT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  WEBSOCKET_HEARTBEAT_INTERVAL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  WEBSOCKET_MANAGER:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  WEBSOCKET_REDIS_CLUSTER:
+    defaults:
+    - str(REDIS_CLUSTER)
+    files:
+    - backend/open_webui/env.py
+  WEBSOCKET_REDIS_LOCK_TIMEOUT:
+    defaults:
+    - '''60'''
+    files:
+    - backend/open_webui/env.py
+  WEBSOCKET_REDIS_OPTIONS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  WEBSOCKET_REDIS_URL:
+    defaults:
+    - REDIS_URL
+    files:
+    - backend/open_webui/env.py
+  WEBSOCKET_SENTINEL_HOSTS:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  WEBSOCKET_SENTINEL_PORT:
+    defaults:
+    - '''26379'''
+    files:
+    - backend/open_webui/env.py
+  WEBSOCKET_SERVER_ENGINEIO_LOGGING:
+    defaults:
+    - os.getenv('WEBSOCKET_SERVER_LOGGING', 'False'),
+    files:
+    - backend/open_webui/env.py
+  WEBSOCKET_SERVER_LOGGING:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/env.py
+  WEBSOCKET_SERVER_PING_INTERVAL:
+    defaults:
+    - '''25'''
+    files:
+    - backend/open_webui/env.py
+  WEBSOCKET_SERVER_PING_TIMEOUT:
+    defaults:
+    - '''20'''
+    files:
+    - backend/open_webui/env.py
+  WEBUI_ADMIN_EMAIL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  WEBUI_ADMIN_NAME:
+    defaults:
+    - '''Admin'''
+    files:
+    - backend/open_webui/env.py
+  WEBUI_ADMIN_PASSWORD:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  WEBUI_AUTH:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/env.py
+  WEBUI_AUTH_COOKIE_SAME_SITE:
+    defaults:
+    - WEBUI_SESSION_COOKIE_SAME_SITE
+    files:
+    - backend/open_webui/env.py
+  WEBUI_AUTH_COOKIE_SECURE:
+    defaults:
+    - os.getenv('WEBUI_SESSION_COOKIE_SECURE', 'false'),
+    files:
+    - backend/open_webui/env.py
+  WEBUI_AUTH_SIGNOUT_REDIRECT_URL:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/env.py
+  WEBUI_AUTH_TRUSTED_EMAIL_HEADER:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/env.py
+  WEBUI_AUTH_TRUSTED_GROUPS_HEADER:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/env.py
+  WEBUI_AUTH_TRUSTED_NAME_HEADER:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/env.py
+  WEBUI_AUTH_TRUSTED_ROLE_HEADER:
+    defaults:
+    - None
+    files:
+    - backend/open_webui/env.py
+  WEBUI_BANNERS:
+    defaults:
+    - '''[]'''
+    files:
+    - backend/open_webui/config.py
+  WEBUI_BUILD_HASH:
+    defaults:
+    - '''dev-build'''
+    files:
+    - backend/open_webui/env.py
+  WEBUI_JWT_SECRET_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/env.py
+  WEBUI_NAME:
+    defaults:
+    - '''Open WebUI'''
+    files:
+    - backend/open_webui/env.py
+  WEBUI_SECRET_KEY:
+    defaults:
+    - os.getenv('WEBUI_JWT_SECRET_KEY', ''),
+    files:
+    - backend/open_webui/env.py
+  WEBUI_SESSION_COOKIE_SAME_SITE:
+    defaults:
+    - '''lax'''
+    files:
+    - backend/open_webui/env.py
+  WEBUI_SESSION_COOKIE_SECURE:
+    defaults:
+    - '''false'''
+    files:
+    - backend/open_webui/env.py
+  WEBUI_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  WEB_FETCH_FILTER_LIST:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  WEB_FETCH_MAX_CONTENT_LENGTH:
+    defaults:
+    - <unset>
+    files:
+    - backend/open_webui/config.py
+  WEB_LOADER_CONCURRENT_REQUESTS:
+    defaults:
+    - '''10'''
+    files:
+    - backend/open_webui/config.py
+  WEB_LOADER_ENGINE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  WEB_LOADER_TIMEOUT:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  WEB_SEARCH_CONCURRENT_REQUESTS:
+    defaults:
+    - '''0'''
+    files:
+    - backend/open_webui/config.py
+  WEB_SEARCH_CONFIRMATION_CONTENT:
+    defaults:
+    - '''Your query will be sent to the configured web search provider.'','
+    files:
+    - backend/open_webui/config.py
+  WEB_SEARCH_DOMAIN_FILTER_LIST:
+    defaults:
+    - '''[]'''
+    files:
+    - backend/open_webui/config.py
+  WEB_SEARCH_ENGINE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  WEB_SEARCH_RESULT_COUNT:
+    defaults:
+    - '''3'''
+    files:
+    - backend/open_webui/config.py
+  WEB_SEARCH_TRUST_ENV:
+    defaults:
+    - '''True'''
+    files:
+    - backend/open_webui/config.py
+  WHISPER_COMPUTE_TYPE:
+    defaults:
+    - '''int8'''
+    files:
+    - backend/open_webui/config.py
+  WHISPER_LANGUAGE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  WHISPER_MODEL:
+    defaults:
+    - '''base'''
+    files:
+    - backend/open_webui/config.py
+  WHISPER_MODEL_AUTO_UPDATE:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  WHISPER_MODEL_DIR:
+    defaults:
+    - f'{CACHE_DIR}/whisper/models'
+    files:
+    - backend/open_webui/config.py
+  WHISPER_MULTILINGUAL:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  WHISPER_VAD_FILTER:
+    defaults:
+    - '''False'''
+    files:
+    - backend/open_webui/config.py
+  YACY_PASSWORD:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  YACY_QUERY_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  YACY_USERNAME:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  YANDEX_WEB_SEARCH_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  YANDEX_WEB_SEARCH_CONFIG:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  YANDEX_WEB_SEARCH_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  YDC_API_KEY:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
+  YOUCOM_API_KEY:
+    defaults:
+    - os.getenv('YDC_API_KEY', '')
+    files:
+    - backend/open_webui/config.py
+  YOUTUBE_LOADER_LANGUAGE:
+    defaults:
+    - '''en'''
+    files:
+    - backend/open_webui/config.py
+  YOUTUBE_LOADER_PROXY_URL:
+    defaults:
+    - ''''''
+    files:
+    - backend/open_webui/config.py
