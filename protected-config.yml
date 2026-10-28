@@ -1,0 +1,49 @@
+# Locked Cloud Run environment for this fork.
+# Deploy fails if live Cloud Run env or secret bindings differ from this file.
+#
+# First time: run the "Deploy Open WebUI" workflow with mode = snapshot-config,
+# download the artifact, replace this file, and commit it.
+# After that, any config drift (console edit, bad deploy flag, upstream merge)
+# fails the deploy job before traffic is shifted.
+
+cloud_run:
+  project: employee-ai-508209
+  region: us-central1
+  service: openwebui
+
+options:
+  fail_on_extra_keys: true
+  # App does not read this name; keep it on Cloud Run but skip the code-key check.
+  not_in_code:
+    - ENABLE_GEMINI_API
+
+env:
+  REDIS_URL: REPLACE_FROM_SNAPSHOT
+  STORAGE_PROVIDER: gcs
+  GCS_BUCKET_NAME: REPLACE_FROM_SNAPSHOT
+  ENABLE_SIGNUP: "false"
+  ENABLE_OAUTH_SIGNUP: "true"
+  OAUTH_MERGE_ACCOUNTS_BY_EMAIL: "true"
+  ENABLE_GEMINI_API: "true"
+  WEBUI_URL: "https://ai.overtminds.com"
+  MICROSOFT_REDIRECT_URI: "https://ai.overtminds.com/oauth/microsoft/callback"
+  OPENID_PROVIDER_URL: "https://login.microsoftonline.com/23c801e3-399f-4f4e-9daa-40bed2f37c63/v2.0/.well-known/openid-configuration"
+  ENABLE_ADMIN_CHAT_ACCESS: "false"
+  ENABLE_ADMIN_EXPORT: "false"
+  ENABLE_LOGIN_FORM: "false"
+  ENABLE_PASSWORD_AUTH: "false"
+  ENABLE_PERSISTENT_CONFIG: "true"
+  OAUTH_AUTO_REDIRECT: "true"
+  USER_PERMISSIONS_WORKSPACE_MODELS_ACCESS: "true"
+  USER_PERMISSIONS_WORKSPACE_KNOWLEDGE_ACCESS: "true"
+  USER_PERMISSIONS_WORKSPACE_PROMPTS_ACCESS: "true"
+  USER_PERMISSIONS_WORKSPACE_TOOLS_ACCESS: "true"
+
+secrets:
+  DATABASE_URL: openwebui-database-url:latest
+  WEBUI_SECRET_KEY: openwebui-secret-key:latest
+  MICROSOFT_CLIENT_ID: openwebui-ms-client-id:latest
+  MICROSOFT_CLIENT_SECRET: openwebui-ms-client-secret:latest
+  MICROSOFT_CLIENT_TENANT_ID: openwebui-ms-tenant-id:latest
+  GEMINI_API_KEY: openwebui-gemini-key:latest
+  OPENAI_API_KEY: openai-api-key:latest
