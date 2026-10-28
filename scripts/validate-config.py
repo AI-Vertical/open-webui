@@ -132,9 +132,12 @@ def parse_env_list(env_list: list[dict[str, Any]]) -> tuple[dict[str, str], dict
 
 
 def container_env_from_resource(resource: dict[str, Any]) -> tuple[dict[str, str], dict[str, str]]:
+    spec = resource.get("spec") or {}
     containers = (
-        resource.get("spec", {}).get("template", {}).get("spec", {}).get("containers")
-        or resource.get("template", {}).get("containers")
+        spec.get("template", {}).get("spec", {}).get("containers")  # Service (Knative v1)
+        or spec.get("containers")  # Revision (Knative v1)
+        or resource.get("template", {}).get("containers")  # Service (Cloud Run v2)
+        or resource.get("containers")  # Revision (Cloud Run v2)
         or []
     )
     if not containers:
